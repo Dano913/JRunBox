@@ -1,3 +1,5 @@
+package exercises;
+import main.App;
 public class Ejercicio16 {
     public static void iniciarEjercicio(App app) {
         app.setTituloEjercicio("Ejercicio 16 - Calculadora de descuento");

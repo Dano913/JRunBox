@@ -1,3 +1,5 @@
+package exercises;
+import main.App;
 public class Ejercicio1 {
 // Define una clase pública con 2 métodos estáticos, que se pueden ejecutar sin crear un objeto de la clase, solo llamándolos.
     public static void iniciarEjercicio(App app) {

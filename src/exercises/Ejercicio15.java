@@ -1,9 +1,11 @@
-public class Ejercicio17 {
+package exercises;
+import main.App;
+public class Ejercicio15 {
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 17 - Condiciones compuestas");
+        app.setTituloEjercicio("Ejercicio 15 - Operadores lógicos");
         app.setPreguntas(new String[]{
                 "Introduce tu edad",
-                "¿Eres estudiante?",
+                "¿Tienes carnet de conducir?",
         });
         app.setRespuestasTexto(new String[app.getPreguntas().length]);
         app.setIndicePregunta(0);
@@ -19,7 +21,7 @@ public class Ejercicio17 {
         respuestas[indice] = texto;
         String[] etiquetas = {
                 "Edad",
-                "Estudiante",
+                "Carnet de conducir",
         };
         app.appendConsola(etiquetas[indice] + ": " + texto + "\n");
         app.setIndicePregunta(indice + 1);
@@ -31,20 +33,27 @@ public class Ejercicio17 {
         } else {
             app.setInputPanelVisible(false);
 
-            try {
-                int edad26 = 26;
+            try{
+                int edadMin = 21;
                 int edad = Integer.parseInt(respuestas[0]);
-                boolean estudiante = Boolean.parseBoolean(respuestas[1]);
-                boolean joven = edad < edad26;
-                if(joven && estudiante) {
-                    app.appendConsola("Tienes menos de "+edad26+" años y eres estudiante, por tanto optas al descuento especial.\n");
-                } else if(joven && !estudiante){
-                    app.appendConsola("Tienes menos de "+edad26+" años pero no eres estudiante, por tanto sólo optas al descuento joven.\n");
-                } else if (!joven && estudiante) {
-                    app.appendConsola("Eres estudiante pero tienes "+edad26+" años o más, por tanto sólo optas al descuento estudiante.\n");
-                } else if(!joven && !estudiante) {
-                    app.appendConsola("No eres estudiante y tienes "+edad26+" o más, por tanto no optas a ningún descuento.\n");
+                boolean carnet = Boolean.parseBoolean(respuestas[1]);
+                boolean mayoria = edad >= edadMin;
+                if (mayoria) {
+                    app.appendConsola("Eres mayor de edad.\n");
+                } else {
+                    app.appendConsola("No eres mayor de edad.\n");
                 }
+                if (carnet) {
+                    app.appendConsola("Tienes carnet de conducir.\n");
+                } else {
+                    app.appendConsola("No tienes carnet de conducir.\n");
+                }
+                if (mayoria && carnet) {
+                    app.appendConsola("Puedes conducir legalmente.\n");
+                } else {
+                    app.appendConsola("No puedes conducir todavía.\n");
+                }
+
             } catch (NumberFormatException e) {
                 app.appendConsola("Error: uno de los valores no es un número válido.\n");
             }

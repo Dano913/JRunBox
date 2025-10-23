@@ -1,40 +1,23 @@
-public class Ejercicio4 {
-
-    // 🔹 Inicia el ejercicio
+package exercises;
+import main.App;
+public class Ejercicio14 {
     public static void iniciarEjercicio(App app) {
+        app.setTituloEjercicio("Ejercicio 14 - Par o impar");
         app.setPreguntas(new String[]{
-                "Ingresa el título del libro:",
-                "Ingresa el autor del libro:",
-                "Ingresa el año de publicación:",
-                "Ingresa el número de páginas:",
-                "¿Disponible en biblioteca? (true/false):"
+                "Introduce un número"
         });
         app.setRespuestasTexto(new String[app.getPreguntas().length]);
         app.setIndicePregunta(0);
         app.setPreguntaLabel(app.getPreguntas()[0]);
         app.limpiarRespuestaField();
-        app.limpiarConsola();
         app.setInputPanelVisible(true);
+        app.limpiarConsola();
         app.requestFocusRespuesta();
     }
-
-    // 🔹 Procesa cada respuesta parcial
     public static void procesarRespuesta(App app, String texto) {
         int indice = app.getIndicePregunta();
         String[] respuestas = app.getRespuestasTexto();
         respuestas[indice] = texto;
-
-        String[] etiquetas = {
-                "Título",
-                "Autor",
-                "Año de publicación",
-                "Número de páginas",
-                "Disponible en biblioteca"
-        };
-
-        app.appendConsola(etiquetas[indice] + ": " + texto + "\n");
-
-        // Avanzar a siguiente pregunta
         app.setIndicePregunta(indice + 1);
 
         if (app.getIndicePregunta() < app.getPreguntas().length) {
@@ -43,7 +26,20 @@ public class Ejercicio4 {
             app.requestFocusRespuesta();
         } else {
             app.setInputPanelVisible(false);
-            app.appendConsola("\n¡Datos del libro completados!\n");
+
+            try {
+                int num1 = Integer.parseInt(respuestas[0]);
+                int resto = num1 % 2;
+                String parImpar;
+                if(resto==0) {
+                    parImpar = "par";
+                } else {
+                    parImpar = "impar";
+                }
+                app.appendConsola("El número "+num1+" es "+parImpar+ " con resto: "+resto+".");
+            } catch (NumberFormatException e) {
+                app.appendConsola("Error: uno de los valores no es un número válido.\n");
+            }
         }
     }
 }

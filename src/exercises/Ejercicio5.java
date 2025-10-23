@@ -1,5 +1,8 @@
+package exercises;
+import main.App;
 public class Ejercicio5 {
     public static void iniciarEjercicio(App app) {
+        app.setTituloEjercicio("Ejercicio 5 – Uso de constantes");
         app.setPreguntas(new String[]{
                 "¿Cómo se llama tu aplicación?",
                 "¿Cuál es la versión?",

@@ -1,3 +1,5 @@
+package exercises;
+import main.App;
 public class Ejercicio12 {
     public static void iniciarEjercicio(App app) {
         app.setTituloEjercicio("Ejercicio 12 - Números comparados");

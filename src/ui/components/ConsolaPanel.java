@@ -14,7 +14,7 @@ public class ConsolaPanel extends RoundedPanel {
 
         // --- Configurar JTextArea ---
         consola.setEditable(false);
-        consola.setFont(new Font("Monospaced", Font.PLAIN, 14));
+        consola.setFont(new Font("Monospaced", Font.PLAIN, 16));
         consola.setBackground(new Color(20, 20, 20));
         consola.setForeground(fgLight);
         consola.setCaretColor(fgLight);

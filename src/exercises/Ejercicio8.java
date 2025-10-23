@@ -1,9 +1,11 @@
-public class Ejercicio10 {
-
-    // 🔹 Inicia el ejercicio
+package exercises;
+import main.App;
+public class Ejercicio8 {
     public static void iniciarEjercicio(App app) {
+        app.setTituloEjercicio("Ejercicio 8 – Área de rectángulo");
         app.setPreguntas(new String[]{
-                "Introduce la temperatura en °C:"
+                "¿Cuánto mide la base del rectángulo?",
+                "¿Cuánto mide la altura del rectángulo?"
         });
         app.setRespuestasTexto(new String[app.getPreguntas().length]);
         app.setIndicePregunta(0);
@@ -13,17 +15,16 @@ public class Ejercicio10 {
         app.limpiarConsola();
         app.requestFocusRespuesta();
     }
-
-    // 🔹 Procesa cada respuesta parcial
     public static void procesarRespuesta(App app, String texto) {
         int indice = app.getIndicePregunta();
         app.getRespuestasTexto()[indice] = texto;
         String[] etiquetas = {
-                "Temperatura en ºC"
+                "Base",
+                "Altura"
         };
+
         app.appendConsola(etiquetas[indice] + ": " + texto + "\n");
         app.setIndicePregunta(indice + 1);
-
         if (app.getIndicePregunta() < app.getPreguntas().length) {
             app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
             app.limpiarRespuestaField();
@@ -33,19 +34,18 @@ public class Ejercicio10 {
             mostrarResultadoFinal(app);
         }
     }
-
-    // 🔹 Mostrar resultado final
     public static void mostrarResultadoFinal(App app) {
-        String entrada = app.getRespuestasTexto()[0].replace(",", ".");
-
+        String[] respuestas = app.getRespuestasTexto();
+        //Crea una referencia local del array de respuestas para ser tratado.
         try {
-            double C = Double.parseDouble(entrada);
-            double F = C * 9 / 5 + 32;
-
-            app.appendConsola("\n" + C + " °C equivalen a " + F + " °F\n");
-
+            double base = Double.parseDouble(respuestas[0]);
+            double altura = Double.parseDouble(respuestas[1]);
+            double area = base * altura;
+            //Convierte las respuestas a números para operar
+            app.appendConsola("\nÁrea del rectángulo: " + area + "\n");
         } catch (NumberFormatException e) {
-            app.appendConsola("Error: el valor ingresado no es un número válido.\n");
+            app.appendConsola("\nError: las entradas no son números válidos.\n");
+            //Salta el error si la respuesta introducida no es un dígito.
         }
     }
 }

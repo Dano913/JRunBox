@@ -1,7 +1,9 @@
-
+package main;
 
 import javax.swing.*;
 import java.awt.*;
+
+import controller.ExerciseHandler;
 import ui.builders.UIBuilder;
 import ui.RoundedPanel;
 
@@ -126,7 +128,7 @@ public class App extends JFrame {
     public void appendConsola(String texto) { consola.append(texto); }
     public void setTituloEjercicio(String titulo) {
         if (tituloEjercicioLabel != null) {
-            tituloEjercicioLabel.setText("▶ " + titulo);
+            tituloEjercicioLabel.setText(titulo);
         }
     }
     public static void main(String[] args) {

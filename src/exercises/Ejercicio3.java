@@ -1,7 +1,8 @@
+package exercises;
+import main.App;
 public class Ejercicio3 {
-
-    // 🔹 Inicia el ejercicio
     public static void iniciarEjercicio(App app) {
+        app.setTituloEjercicio("Ejercicio 3 – Tipos de variables");
         app.setPreguntas(new String[]{
                 "Ingresa un nombre (String):",
                 "Ingresa la edad (int):",

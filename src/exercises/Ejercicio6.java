@@ -1,9 +1,11 @@
-public class Ejercicio15 {
+package exercises;
+import main.App;
+public class Ejercicio6 {
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 15 - Operadores lógicos");
+        app.setTituloEjercicio("Ejercicio 6 – Operaciones aritméticas");
         app.setPreguntas(new String[]{
-                "Introduce tu edad",
-                "¿Tienes carnet de conducir?",
+                "Introduce un número",
+                "Introduce otro número"
         });
         app.setRespuestasTexto(new String[app.getPreguntas().length]);
         app.setIndicePregunta(0);
@@ -18,8 +20,8 @@ public class Ejercicio15 {
         String[] respuestas = app.getRespuestasTexto();
         respuestas[indice] = texto;
         String[] etiquetas = {
-                "Edad",
-                "Carnet de conducir",
+                "Primer número",
+                "Segundo número"
         };
         app.appendConsola(etiquetas[indice] + ": " + texto + "\n");
         app.setIndicePregunta(indice + 1);
@@ -31,30 +33,21 @@ public class Ejercicio15 {
         } else {
             app.setInputPanelVisible(false);
 
-            try{
-                int edadMin = 21;
-                int edad = Integer.parseInt(respuestas[0]);
-                boolean carnet = Boolean.parseBoolean(respuestas[1]);
-                boolean mayoria = edad >= edadMin;
-                if (mayoria) {
-                    app.appendConsola("Eres mayor de edad.\n");
-                } else {
-                    app.appendConsola("No eres mayor de edad.\n");
-                }
-                if (carnet) {
-                    app.appendConsola("Tienes carnet de conducir.\n");
-                } else {
-                    app.appendConsola("No tienes carnet de conducir.\n");
-                }
-                if (mayoria && carnet) {
-                    app.appendConsola("Puedes conducir legalmente.\n");
-                } else {
-                    app.appendConsola("No puedes conducir todavía.\n");
-                }
-
+            try {
+                double num1 = Double.parseDouble(respuestas[0]);
+                double num2 = Double.parseDouble(respuestas[1]);
+                app.appendConsola("\nOperaciones aritméticas:\n");
+                app.appendConsola("Suma: " + num1 + " + " + num2 + " = " + (num1 + num2) + "\n");
+                app.appendConsola("Resta: " + num1 + " - " + num2 + " = " + (num1 - num2) + "\n");
+                app.appendConsola("Multiplicación: " + num1 + " * " + num2 + " = " + (num1 * num2) + "\n");
+                app.appendConsola((num2 != 0)
+                        ? "División: " + num1 + " / " + num2 + " = " + (num1 / num2) + "\n"
+                        : "División entre 0 no permitida\n");
             } catch (NumberFormatException e) {
                 app.appendConsola("Error: uno de los valores no es un número válido.\n");
             }
+
+            app.appendConsola("¡Operaciones aritméticas resueltas!\n");
         }
     }
 }

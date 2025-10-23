@@ -1,9 +1,12 @@
+package exercises;
+import main.App;
 import java.util.Locale;
 
 public class Ejercicio9 {
 
     // 🔹 Inicia el ejercicio
     public static void iniciarEjercicio(App app) {
+        app.setTituloEjercicio("Ejercicio 9 – Información de producto");
         app.setPreguntas(new String[]{
                 "Introduzca el nombre del producto",
                 "Introduzca el precio del producto",

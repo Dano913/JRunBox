@@ -1,6 +1,9 @@
+package exercises;
+import main.App;
 import javax.swing.JOptionPane;
 public class Ejercicio2 {
     public static void iniciarEjercicio(App app) {
+        app.setTituloEjercicio("Ejercicio 2 – Puntuaciones modificadas");
         app.setPreguntas(new String[]{
                 "Cuántos puntos ganas en la primera modificación?",
                 "Cuántos puntos ganas en la segunda modificación?",

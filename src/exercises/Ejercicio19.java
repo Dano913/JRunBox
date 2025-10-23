@@ -1,3 +1,5 @@
+package exercises;
+import main.App;
 public class Ejercicio19 {
     public static void iniciarEjercicio(App app) {
         app.setTituloEjercicio("Ejercicio 19 - Sistema de calificaciones");

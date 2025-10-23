@@ -1,5 +1,8 @@
+package exercises;
+import main.App;
 public class Ejercicio7 {
     public static void iniciarEjercicio(App app) {
+        app.setTituloEjercicio("Ejercicio 7 – Presentacion personal");
         app.setPreguntas(new String[]{
                 "Ingresa tu nombre",
                 "Ingresa tu apellido",

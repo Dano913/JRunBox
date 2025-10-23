@@ -1,3 +1,5 @@
+package exercises;
+import main.App;
 public class Ejercicio20 {
     public static void iniciarEjercicio(App app) {
         app.setTituloEjercicio("Ejercicio 20 - Calculadora de salario");

@@ -1,6 +1,8 @@
+package exercises;
+import main.App;
 public class Ejercicio13 {
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 13 - Asignación combinada");
+        app.setTituloEjercicio("Ejercicio 13 - Asignación compuesta");
         app.setPreguntas(new String[]{
                 "Introduce un valor inicial",
                 "Añade un primer valor para sumar",
