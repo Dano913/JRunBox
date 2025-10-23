@@ -5,7 +5,6 @@ import java.awt.*;
 import ui.builders.UIBuilder;
 import ui.RoundedPanel;
 
-
 public class App extends JFrame {
 
     private JLabel tituloEjercicioLabel;
@@ -47,13 +46,7 @@ public class App extends JFrame {
         Color botonColor = new Color(64, 64, 64);
 
 // --- CREAR LOS CONTROLES PRIMERO ---
-        String[] nombresEjercicios = {
-                "Ejercicio 1","Ejercicio 2","Ejercicio 3","Ejercicio 4","Ejercicio 5",
-                "Ejercicio 6","Ejercicio 7","Ejercicio 8","Ejercicio 9","Ejercicio 10",
-                "Ejercicio 11","Ejercicio 12","Ejercicio 13","Ejercicio 14","Ejercicio 15",
-                "Ejercicio 16","Ejercicio 17","Ejercicio 18","Ejercicio 19","Ejercicio 20"
-        };
-        comboEjercicios = new JComboBox<>(nombresEjercicios);
+        comboEjercicios = new JComboBox<>(ExerciseHandler.NOMBRES_EJERCICIOS);
         botonEjecutar = new JButton("Ejecutar");
 
 // --- CREAR PANEL PRINCIPAL ---
@@ -103,65 +96,16 @@ public class App extends JFrame {
             String ejercicioSeleccionado = (String) comboEjercicios.getSelectedItem();
             if (ejercicioSeleccionado != null) {
                 ejercicioActual = ejercicioSeleccionado;
-                iniciarEjercicio(ejercicioActual);
+                ExerciseHandler.iniciarEjercicio(this, ejercicioActual);
             }
         });
-        siguienteButton.addActionListener(e -> procesarRespuesta());
-        respuestaField.addActionListener(e -> procesarRespuesta());
-    }
+        siguienteButton.addActionListener(e ->
+                ExerciseHandler.procesarRespuesta(this, ejercicioActual, respuestaField.getText().trim())
+        );
 
-    // --- Métodos para delegar a los ejercicios ---
-    private void iniciarEjercicio(String ejercicio) {
-        switch (ejercicio) {
-            case "Ejercicio 1" -> Ejercicio1.iniciarEjercicio(this);
-            case "Ejercicio 2" -> Ejercicio2.iniciarEjercicio(this);
-            case "Ejercicio 3" -> Ejercicio3.iniciarEjercicio(this);
-            case "Ejercicio 4" -> Ejercicio4.iniciarEjercicio(this);
-            case "Ejercicio 5" -> Ejercicio5.iniciarEjercicio(this);
-            case "Ejercicio 6" -> Ejercicio6.iniciarEjercicio(this);
-            case "Ejercicio 7" -> Ejercicio7.iniciarEjercicio(this);
-            case "Ejercicio 8" -> Ejercicio8.iniciarEjercicio(this);
-            case "Ejercicio 9" -> Ejercicio9.iniciarEjercicio(this);
-            case "Ejercicio 10" -> Ejercicio10.iniciarEjercicio(this);
-            case "Ejercicio 11" -> Ejercicio11.iniciarEjercicio(this);
-            case "Ejercicio 12" -> Ejercicio12.iniciarEjercicio(this);
-            case "Ejercicio 13" -> Ejercicio13.iniciarEjercicio(this);
-            case "Ejercicio 14" -> Ejercicio14.iniciarEjercicio(this);
-            case "Ejercicio 15" -> Ejercicio15.iniciarEjercicio(this);
-            case "Ejercicio 16" -> Ejercicio16.iniciarEjercicio(this);
-            case "Ejercicio 17" -> Ejercicio17.iniciarEjercicio(this);
-            case "Ejercicio 18" -> Ejercicio18.iniciarEjercicio(this);
-            case "Ejercicio 19" -> Ejercicio19.iniciarEjercicio(this);
-            case "Ejercicio 20" -> Ejercicio20.iniciarEjercicio(this);
-        }
-    }
-
-    private void procesarRespuesta() {
-        if (ejercicioActual == null) return; // seguridad
-        String texto = respuestaField.getText().trim();
-
-        switch (ejercicioActual) {
-            case "Ejercicio 1" -> Ejercicio1.procesarRespuesta(this, texto);
-            case "Ejercicio 2" -> Ejercicio2.procesarRespuesta(this, texto);
-            case "Ejercicio 3" -> Ejercicio3.procesarRespuesta(this, texto);
-            case "Ejercicio 4" -> Ejercicio4.procesarRespuesta(this, texto);
-            case "Ejercicio 5" -> Ejercicio5.procesarRespuesta(this, texto);
-            case "Ejercicio 6" -> Ejercicio6.procesarRespuesta(this, texto);
-            case "Ejercicio 7" -> Ejercicio7.procesarRespuesta(this, texto);
-            case "Ejercicio 8" -> Ejercicio8.procesarRespuesta(this, texto);
-            case "Ejercicio 9" -> Ejercicio9.procesarRespuesta(this, texto);
-            case "Ejercicio 10" -> Ejercicio10.procesarRespuesta(this, texto);
-            case "Ejercicio 11" -> Ejercicio11.procesarRespuesta(this, texto);
-            case "Ejercicio 12" -> Ejercicio12.procesarRespuesta(this, texto);
-            case "Ejercicio 13" -> Ejercicio13.procesarRespuesta(this, texto);
-            case "Ejercicio 14" -> Ejercicio14.procesarRespuesta(this, texto);
-            case "Ejercicio 15" -> Ejercicio15.procesarRespuesta(this, texto);
-            case "Ejercicio 16" -> Ejercicio16.procesarRespuesta(this, texto);
-            case "Ejercicio 17" -> Ejercicio17.procesarRespuesta(this, texto);
-            case "Ejercicio 18" -> Ejercicio18.procesarRespuesta(this, texto);
-            case "Ejercicio 19" -> Ejercicio19.procesarRespuesta(this, texto);
-            case "Ejercicio 20" -> Ejercicio20.procesarRespuesta(this, texto);
-        }
+        respuestaField.addActionListener(e ->
+                ExerciseHandler.procesarRespuesta(this, ejercicioActual, respuestaField.getText().trim())
+        );
     }
 
     // --- Getters y setters para ejercicios ---
