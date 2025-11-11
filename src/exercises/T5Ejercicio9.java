@@ -1,0 +1,93 @@
+package exercises;
+
+import main.App;
+
+public class T5Ejercicio9 {
+
+    private static int cantidadEstudiantes = 0;
+    private static int contador = 0;
+
+    public static void iniciarEjercicio(App app) {
+        cantidadEstudiantes = 0;
+        contador = 0;
+
+        app.setTituloEjercicio("Ejercicio 9 - Sistema de notas");
+        app.setPreguntas(new String[]{"¿Cuántos estudiantes hay en la clase?"});
+        app.setRespuestasTexto(new String[1]); // solo para la cantidad inicial
+        app.setIndicePregunta(0);
+        app.setPreguntaLabel(app.getPreguntas()[0]);
+        app.limpiarRespuestaField();
+        app.limpiarConsola();
+        app.setInputPanelVisible(true);
+        app.requestFocusRespuesta();
+    }
+
+    public static void procesarRespuesta(App app, String texto) {
+        // Fase 0: pedir cantidad de estudiantes
+        if (cantidadEstudiantes == 0) {
+            try {
+                cantidadEstudiantes = Integer.parseInt(texto);
+                if (cantidadEstudiantes <= 0) throw new NumberFormatException();
+            } catch (NumberFormatException e) {
+                app.appendConsola("Introduce un número válido mayor que 0.\n");
+                app.limpiarRespuestaField();
+                app.requestFocusRespuesta();
+                return;
+            }
+
+            // Preparamos array para calificaciones
+            app.setRespuestasTexto(new String[cantidadEstudiantes]);
+            contador = 0;
+            app.setPreguntaLabel("Introduce la nota del estudiante 1 (0-10):");
+            app.limpiarRespuestaField();
+            app.requestFocusRespuesta();
+            return;
+        }
+
+        // Fase 1: while para pedir calificaciones
+        while (contador < cantidadEstudiantes) {
+            int nota;
+            try {
+                nota = Integer.parseInt(texto);
+                if (nota < 0 || nota > 10) throw new NumberFormatException();
+            } catch (NumberFormatException e) {
+                app.appendConsola("Introduce una nota válida entre 0 y 10.\n");
+                app.limpiarRespuestaField();
+                app.requestFocusRespuesta();
+                return;
+            }
+
+            app.getRespuestasTexto()[contador] = texto;
+            contador++;
+            app.appendConsola("Nota del estudiante " + contador + ": " + texto + "\n");
+
+            // Si quedan más estudiantes, actualizamos la pregunta y salimos del while
+            if (contador < cantidadEstudiantes) {
+                app.setPreguntaLabel("Introduce la nota del estudiante " + (contador + 1) + " (0-10):");
+                app.limpiarRespuestaField();
+                app.requestFocusRespuesta();
+                return; // importante para no bloquear la UI
+            }
+        }
+
+        // Fase 2: for para mostrar reporte
+        app.appendConsola("\n--- REPORTE DE CALIFICACIONES ---\n");
+
+        String[] respuestas = app.getRespuestasTexto();
+        for (int i = 0; i < cantidadEstudiantes; i++) {
+            int nota = Integer.parseInt(respuestas[i]);
+            String letra;
+            switch (nota) {
+                case 9, 10 -> letra = "A";
+                case 7, 8 -> letra = "B";
+                case 5, 6 -> letra = "C";
+                case 3, 4 -> letra = "D";
+                case 0, 1, 2 -> letra = "F";
+                default -> letra = "Desconocida";
+            }
+            app.appendConsola("Estudiante " + (i + 1) + ": " + nota + " puntos = Calificación " + letra + "\n");
+        }
+
+        app.setInputPanelVisible(false);
+    }
+}

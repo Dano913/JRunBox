@@ -18,9 +18,11 @@ public class UIBuilder {
         return mainPanel;
     }
 
-    public RoundedPanel buildTopPanel(JComboBox<String> comboEjercicios, JButton botonEjecutar, Color fgLight, Color botonColor) {
+    public TopPanel buildTopPanel(JComboBox<String> comboEjercicios, JButton botonEjecutar,
+                                  Color fgLight, Color botonColor) {
         return new TopPanel(comboEjercicios, botonEjecutar, fgLight, botonColor);
     }
+
 
     public RoundedPanel buildCentralPanel(
             JLabel tituloEjercicioLabel,

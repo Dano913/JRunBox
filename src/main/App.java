@@ -7,6 +7,11 @@ import controller.ExerciseHandler;
 import ui.builders.UIBuilder;
 import ui.RoundedPanel;
 
+import utils.ExecutionUtils;
+
+import ui.components.TopPanel;
+
+
 public class App extends JFrame {
 
     private JLabel tituloEjercicioLabel;
@@ -17,7 +22,7 @@ public class App extends JFrame {
     private JButton siguienteButton;
 
     private RoundedPanel mainPanel;
-    private JPanel panelTop;
+    private TopPanel topPanel;
     private JPanel panelCentral;
     private JPanel panelDerecho;
     private JScrollPane scroll;
@@ -56,7 +61,7 @@ public class App extends JFrame {
         mainPanel = builder.buildMainPanel();
 
 // --- CREAR PANEL SUPERIOR REDONDEADO ---
-        RoundedPanel topPanel = builder.buildTopPanel(comboEjercicios, botonEjecutar, fgLight, botonColor);
+        topPanel = builder.buildTopPanel(comboEjercicios, botonEjecutar, fgLight, botonColor);
         mainPanel.add(topPanel, BorderLayout.NORTH);
 
 
@@ -98,9 +103,16 @@ public class App extends JFrame {
             String ejercicioSeleccionado = (String) comboEjercicios.getSelectedItem();
             if (ejercicioSeleccionado != null) {
                 ejercicioActual = ejercicioSeleccionado;
-                ExerciseHandler.iniciarEjercicio(this, ejercicioActual);
+
+                long duration = ExecutionUtils.medirTiempo(() -> {
+                    ExerciseHandler.iniciarEjercicio(this, ejercicioActual);
+                });
+
+                topPanel.setTiempoEjecucion(duration);
             }
         });
+
+
         siguienteButton.addActionListener(e ->
                 ExerciseHandler.procesarRespuesta(this, ejercicioActual, respuestaField.getText().trim())
         );
@@ -125,7 +137,12 @@ public class App extends JFrame {
     public void setInputPanelVisible(boolean visible) { inputPanel.setVisible(visible); }
     public void limpiarConsola() { consola.setText(""); }
     public void requestFocusRespuesta() { respuestaField.requestFocus(); }
-    public void appendConsola(String texto) { consola.append(texto); }
+    public void appendConsola(String texto) {
+        SwingUtilities.invokeLater(() -> {
+            consola.append(texto);
+            consola.setCaretPosition(consola.getDocument().getLength()); // auto-scroll al final
+        });
+    }
     public void setTituloEjercicio(String titulo) {
         if (tituloEjercicioLabel != null) {
             tituloEjercicioLabel.setText(titulo);

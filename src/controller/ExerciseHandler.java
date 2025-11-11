@@ -1,64 +1,82 @@
 package controller;
-import exercises.*;
+
 import main.App;
+import java.lang.reflect.Method;
+
 public class ExerciseHandler {
 
-    public static final String[] NOMBRES_EJERCICIOS = {
-            "Seleccione Ejercicio", "Ejercicio 1","Ejercicio 2","Ejercicio 3","Ejercicio 4","Ejercicio 5",
-            "Ejercicio 6","Ejercicio 7","Ejercicio 8","Ejercicio 9","Ejercicio 10",
-            "Ejercicio 11","Ejercicio 12","Ejercicio 13","Ejercicio 14","Ejercicio 15",
-            "Ejercicio 16","Ejercicio 17","Ejercicio 18","Ejercicio 19","Ejercicio 20"
-    };
+    // Configuración: número de ejercicios por tema
+    private static final int[] EJERCICIOS_POR_TEMA = {10, 10, 15, 10, 10, 4, 10};
 
-    public static void iniciarEjercicio(App app, String ejercicio) {
-        switch (ejercicio) {
-            case "Ejercicio 1" -> Ejercicio1.iniciarEjercicio(app);
-            case "Ejercicio 2" -> Ejercicio2.iniciarEjercicio(app);
-            case "Ejercicio 3" -> Ejercicio3.iniciarEjercicio(app);
-            case "Ejercicio 4" -> Ejercicio4.iniciarEjercicio(app);
-            case "Ejercicio 5" -> Ejercicio5.iniciarEjercicio(app);
-            case "Ejercicio 6" -> Ejercicio6.iniciarEjercicio(app);
-            case "Ejercicio 7" -> Ejercicio7.iniciarEjercicio(app);
-            case "Ejercicio 8" -> Ejercicio8.iniciarEjercicio(app);
-            case "Ejercicio 9" -> Ejercicio9.iniciarEjercicio(app);
-            case "Ejercicio 10" -> Ejercicio10.iniciarEjercicio(app);
-            case "Ejercicio 11" -> Ejercicio11.iniciarEjercicio(app);
-            case "Ejercicio 12" -> Ejercicio12.iniciarEjercicio(app);
-            case "Ejercicio 13" -> Ejercicio13.iniciarEjercicio(app);
-            case "Ejercicio 14" -> Ejercicio14.iniciarEjercicio(app);
-            case "Ejercicio 15" -> Ejercicio15.iniciarEjercicio(app);
-            case "Ejercicio 16" -> Ejercicio16.iniciarEjercicio(app);
-            case "Ejercicio 17" -> Ejercicio17.iniciarEjercicio(app);
-            case "Ejercicio 18" -> Ejercicio18.iniciarEjercicio(app);
-            case "Ejercicio 19" -> Ejercicio19.iniciarEjercicio(app);
-            case "Ejercicio 20" -> Ejercicio20.iniciarEjercicio(app);
+    // Generar nombres legibles para la interfaz
+    public static final String[] NOMBRES_EJERCICIOS = generarNombres(EJERCICIOS_POR_TEMA);
+
+    /**
+     * Genera nombres legibles: "T1 - Ejercicio 1", "T2 - Ejercicio 5", etc.
+     */
+    private static String[] generarNombres(int[] ejerciciosPorTema) {
+        int total = 1; // +1 para "Seleccione Ejercicio"
+        for (int n : ejerciciosPorTema) total += n;
+
+        String[] nombres = new String[total];
+        nombres[0] = "Seleccione Ejercicio";
+        int index = 1;
+
+        for (int t = 0; t < ejerciciosPorTema.length; t++) {
+            int numEjercicios = ejerciciosPorTema[t];
+            for (int e = 1; e <= numEjercicios; e++) {
+                nombres[index++] = "T" + (t + 1) + " - Ejercicio " + e;
+            }
         }
+
+        return nombres;
     }
 
+    /**
+     * Inicia un ejercicio
+     */
+    public static void iniciarEjercicio(App app, String ejercicio) {
+        ejecutarMetodo(app, ejercicio, "iniciarEjercicio");
+    }
+
+    /**
+     * Procesa la respuesta de un ejercicio
+     */
     public static void procesarRespuesta(App app, String ejercicio, String texto) {
         if (ejercicio == null) return;
+        ejecutarMetodo(app, ejercicio, "procesarRespuesta", texto);
+    }
 
-        switch (ejercicio) {
-            case "Ejercicio 1" -> Ejercicio1.procesarRespuesta(app, texto);
-            case "Ejercicio 2" -> Ejercicio2.procesarRespuesta(app, texto);
-            case "Ejercicio 3" -> Ejercicio3.procesarRespuesta(app, texto);
-            case "Ejercicio 4" -> Ejercicio4.procesarRespuesta(app, texto);
-            case "Ejercicio 5" -> Ejercicio5.procesarRespuesta(app, texto);
-            case "Ejercicio 6" -> Ejercicio6.procesarRespuesta(app, texto);
-            case "Ejercicio 7" -> Ejercicio7.procesarRespuesta(app, texto);
-            case "Ejercicio 8" -> Ejercicio8.procesarRespuesta(app, texto);
-            case "Ejercicio 9" -> Ejercicio9.procesarRespuesta(app, texto);
-            case "Ejercicio 10" -> Ejercicio10.procesarRespuesta(app, texto);
-            case "Ejercicio 11" -> Ejercicio11.procesarRespuesta(app, texto);
-            case "Ejercicio 12" -> Ejercicio12.procesarRespuesta(app, texto);
-            case "Ejercicio 13" -> Ejercicio13.procesarRespuesta(app, texto);
-            case "Ejercicio 14" -> Ejercicio14.procesarRespuesta(app, texto);
-            case "Ejercicio 15" -> Ejercicio15.procesarRespuesta(app, texto);
-            case "Ejercicio 16" -> Ejercicio16.procesarRespuesta(app, texto);
-            case "Ejercicio 17" -> Ejercicio17.procesarRespuesta(app, texto);
-            case "Ejercicio 18" -> Ejercicio18.procesarRespuesta(app, texto);
-            case "Ejercicio 19" -> Ejercicio19.procesarRespuesta(app, texto);
-            case "Ejercicio 20" -> Ejercicio20.procesarRespuesta(app, texto);
+    /**
+     * Metodo genérico que ejecuta métodos estáticos de ejercicios usando reflexión
+     */
+    private static void ejecutarMetodo(App app, String ejercicio, String nombreMetodo, String... args) {
+        try {
+            // Convertir nombre legible en nombre de clase: "T1 - Ejercicio 1" -> "T1Ejercicio1"
+            String claseEjercicio = ejercicio.replace(" - Ejercicio ", "Ejercicio");
+            claseEjercicio = "exercises." + claseEjercicio; // Paquete completo
+
+            // Obtener la clase mediante reflexión
+            Class<?> clase = Class.forName(claseEjercicio);
+
+            Method metodo;
+            if (args.length > 0) {
+                // procesarRespuesta(App app, String texto)
+                metodo = clase.getMethod(nombreMetodo, App.class, String.class);
+                metodo.invoke(null, app, args[0]); // null porque es metodo estático
+            } else {
+                // iniciarEjercicio(App app)
+                metodo = clase.getMethod(nombreMetodo, App.class);
+                metodo.invoke(null, app);
+            }
+
+        } catch (ClassNotFoundException e) {
+            app.appendConsola("❌ Error: No se encontró " + ejercicio + "\n");
+        } catch (NoSuchMethodException e) {
+            app.appendConsola("❌ Error: El método '" + nombreMetodo + "' no existe en " + ejercicio + "\n");
+        } catch (Exception e) {
+            app.appendConsola("❌ Error al ejecutar " + ejercicio + ": " + e.getMessage() + "\n");
+            e.printStackTrace();
         }
     }
 }

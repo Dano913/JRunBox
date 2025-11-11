@@ -26,6 +26,12 @@ public class ConsolaPanel extends RoundedPanel {
         scroll.setOpaque(false);
         scroll.getViewport().setOpaque(false);
 
+        scroll.getVerticalScrollBar().setUI(new CustomScrollBarUI());
+        scroll.getHorizontalScrollBar().setUI(new CustomScrollBarUI());
+
+        ((CustomScrollBarUI) scroll.getVerticalScrollBar().getUI()).setThinScrollbar(scroll.getVerticalScrollBar());
+        ((CustomScrollBarUI) scroll.getHorizontalScrollBar().getUI()).setThinScrollbar(scroll.getHorizontalScrollBar());
+
         add(scroll, BorderLayout.CENTER);
     }
 }
