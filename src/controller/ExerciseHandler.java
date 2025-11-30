@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 public class ExerciseHandler {
 
     // Configuración: número de ejercicios por tema
-    private static final int[] EJERCICIOS_POR_TEMA = {10, 10, 15, 10, 10, 4, 10, 10};
+    private static final int[] EJERCICIOS_POR_TEMA = {10, 10, 15, 10, 10, 4, 10, 10, 10};
 
     // Generar nombres legibles para la interfaz
     public static final String[] NOMBRES_EJERCICIOS = generarNombres(EJERCICIOS_POR_TEMA);
