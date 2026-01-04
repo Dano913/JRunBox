@@ -1,50 +1,59 @@
 package exercises;
+
 import main.App;
+import utils.EjercicioUtils;
 
 public class T3Ejercicio8 {
+
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 28 - Comparación de números");
+        app.setTituloEjercicio("Ejercicio 8 Tema 3 - Comparación de números");
         app.setPreguntas(new String[]{
                 "Introduce el primer número",
                 "Introduce el segundo número"
         });
-        app.setRespuestasTexto(new String[app.getPreguntas().length]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.limpiarConsola();
-        app.setInputPanelVisible(true);
-        app.requestFocusRespuesta();
+        EjercicioUtils.inicializarEntrada(app);
     }
-    public static void procesarRespuesta(App app, String texto) {
-        int indice = app.getIndicePregunta();
-        String[] respuestas = app.getRespuestasTexto();
-        respuestas[indice] = texto;
-        String[] etiquetas = {
-                "Primer número",
-                "Segundo número"
-        };
-        app.appendConsola(etiquetas[indice] + ": " + texto + "\n");
-        app.setIndicePregunta(indice + 1);
 
-        if (app.getIndicePregunta() < app.getPreguntas().length) {
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
+    public static void procesarRespuesta(App app, String texto) {
+        String[] etiquetas = { "Primer número", "Segundo número" };
+        double numero;
+
+        // Validar que sea un número válido
+        try {
+            numero = Double.parseDouble(texto);
+        } catch (NumberFormatException e) {
+            app.appendConsola("❌ Error: ingresa un número válido.\n");
             app.limpiarRespuestaField();
             app.requestFocusRespuesta();
-        } else {
-            app.setInputPanelVisible(false);
-
-            try {
-                double num1 = Double.parseDouble(respuestas[0]);
-                double num2 = Double.parseDouble(respuestas[1]);
-                if(num1>num2) {
-                    app.appendConsola(num1+" es mayor que "+num2);
-                } else {
-                    app.appendConsola(num1+" es menor que "+num2);
-                }
-            } catch (NumberFormatException e) {
-                app.appendConsola("Error: uno de los valores no es un número válido.\n");
-            }
+            return;
         }
+
+        // Guardar y mostrar la respuesta
+        EjercicioUtils.procesarRespuesta(app, String.valueOf(numero), etiquetas, null);
+        EjercicioUtils.avanzarPregunta(app);
+
+        // Si no quedan preguntas, realizar comparación
+        if (app.getIndicePregunta() >= app.getPreguntas().length) {
+            compararNumeros(app);
+        }
+    }
+
+    private static void compararNumeros(App app) {
+        app.setInputPanelVisible(false);
+        String[] respuestas = app.getRespuestasTexto();
+
+        double num1 = Double.parseDouble(respuestas[0]);
+        double num2 = Double.parseDouble(respuestas[1]);
+        String resultado;
+
+        if (num1 > num2) {
+            resultado = num1 + " es mayor que " + num2;
+        } else if (num1 < num2) {
+            resultado = num1 + " es menor que " + num2;
+        } else {
+            resultado = num1 + " es igual a " + num2;
+        }
+
+        app.appendConsola(resultado + "\n");
     }
 }

@@ -1,25 +1,22 @@
 package exercises;
 
 import main.App;
+import utils.EjercicioUtils;
 
 public class T5Ejercicio7 {
 
     private static int cantidad = 0;   // número de calificaciones a introducir
     private static int contador = 0;   // cuántas ya se han introducido
+    private static double suma = 0;    // acumulador de calificaciones
 
     public static void iniciarEjercicio(App app) {
         cantidad = 0;
         contador = 0;
+        suma = 0;
 
-        app.setTituloEjercicio("Ejercicio 7 - Calcular promedio con while");
+        app.setTituloEjercicio("Ejercicio 7 Tema 5 - Calcular promedio con while");
         app.setPreguntas(new String[]{"¿Cuántas calificaciones vas a introducir?"});
-        app.setRespuestasTexto(new String[1]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.limpiarConsola();
-        app.setInputPanelVisible(true);
-        app.requestFocusRespuesta();
+        EjercicioUtils.inicializarEntrada(app);
     }
 
     public static void procesarRespuesta(App app, String texto) {
@@ -35,9 +32,10 @@ public class T5Ejercicio7 {
                 return;
             }
 
-            // Preparamos array para calificaciones
+            // Inicializamos array para calificaciones
             app.setRespuestasTexto(new String[cantidad]);
             contador = 0;
+            suma = 0;
             app.setPreguntaLabel("Introduce la calificación 1:");
             app.limpiarRespuestaField();
             app.requestFocusRespuesta();
@@ -49,6 +47,7 @@ public class T5Ejercicio7 {
             double cal = Double.parseDouble(texto);
             app.getRespuestasTexto()[contador] = texto;
             contador++;
+            suma += cal;
             app.appendConsola("Calificación " + contador + ": " + texto + "\n");
         } catch (NumberFormatException e) {
             app.appendConsola("Por favor, introduce un número válido.\n");
@@ -63,14 +62,7 @@ public class T5Ejercicio7 {
             app.requestFocusRespuesta();
         } else {
             // Todas las calificaciones introducidas
-            double suma = 0;
-            for (String s : app.getRespuestasTexto()) {
-                try {
-                    suma += Double.parseDouble(s);
-                } catch (NumberFormatException ignored) {}
-            }
             double promedio = suma / cantidad;
-
             app.appendConsola("\nSuma total: " + suma);
             app.appendConsola("\nPromedio de calificaciones: " + promedio + "\n");
             app.setInputPanelVisible(false);

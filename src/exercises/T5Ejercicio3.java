@@ -8,46 +8,45 @@ public class T5Ejercicio3 {
     private static int suma = 0;
 
     public static void iniciarEjercicio(App app) {
-
-
-        app.setTituloEjercicio("Ejercicio 48 - Suma de números positivos");
-        app.setPreguntas(new String[]{"Introduce un número positivo (0 o negativo para terminar)"});
-        suma= 0;
+        app.setTituloEjercicio("Ejercicio 3 Tema 5 - Suma de números positivos");
+        app.setPreguntas(new String[]{
+                "Introduce un número positivo (0 o negativo para terminar)"
+        });
+        suma = 0;
         EjercicioUtils.inicializarEntrada(app);
     }
 
     public static void procesarRespuesta(App app, String texto) {
-        String[] etiquetas = {"Número introducido", "Suma actual"};
-        String[] unidades = {"", ""};
 
-        // Guardamos la respuesta y mostramos en consola
-        EjercicioUtils.procesarRespuesta(app, texto, etiquetas, unidades);
+        app.appendConsola("Número introducido: " + texto + "\n");
 
         int num;
+
         try {
             num = Integer.parseInt(texto);
         } catch (NumberFormatException e) {
-            app.appendConsola("Por favor, introduce un número válido.\n");
+            app.appendConsola("❌ Por favor, introduce un número válido.\n");
             app.limpiarRespuestaField();
             app.requestFocusRespuesta();
             return;
         }
 
-        while (num > 0) {
-            suma += num; // acumulamos el número positivo
-            app.appendConsola("Suma actual: " + suma + "\n");
+        boolean continuar;
 
-            // Preparar para el siguiente número
-            app.setIndicePregunta(0);
-            app.setPreguntaLabel(app.getPreguntas()[0]);
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+        do {
+            continuar = num > 0;
 
-            return; // salimos hasta el siguiente intento
-        }
+            if (continuar) {
+                suma += num;
+                app.appendConsola("Suma actual: " + suma + "\n");
+                app.limpiarRespuestaField();
+                app.requestFocusRespuesta();
+                return; // ⬅️ simula la repetición del do-while
+            }
 
-        // Si el número es cero o negativo, terminamos el ejercicio
-        app.appendConsola("Número negativo o cero introducido. Fin del ejercicio.\n");
+        } while (continuar);
+
+        app.appendConsola("Fin del ejercicio.\n");
         app.appendConsola("Suma total: " + suma + "\n");
         app.setInputPanelVisible(false);
     }

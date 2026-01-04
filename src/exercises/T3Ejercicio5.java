@@ -1,50 +1,47 @@
 package exercises;
+
 import main.App;
+import utils.EjercicioUtils;
 
 public class T3Ejercicio5 {
-    public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 25 - Compra con descuento");
-        app.setPreguntas(new String[]{
-                "Introduce un número"
-        });
-        app.setRespuestasTexto(new String[app.getPreguntas().length]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.limpiarConsola();
-        app.setInputPanelVisible(true);
-        app.requestFocusRespuesta();
-    }
-    public static void procesarRespuesta(App app, String texto) {
-        int indice = app.getIndicePregunta();
-        String[] respuestas = app.getRespuestasTexto();
-        respuestas[indice] = texto;
-        String[] etiquetas = {
-                "Número",
-        };
-        app.appendConsola(etiquetas[indice] + ": " + texto + "\n");
-        app.setIndicePregunta(indice + 1);
 
-        if (app.getIndicePregunta() < app.getPreguntas().length) {
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
+    public static void iniciarEjercicio(App app) {
+        app.setTituloEjercicio("Ejercicio 5 Tema 3 - Par o impar");
+        app.setPreguntas(new String[]{ "Introduce un número" });
+
+        // Inicializa el panel de entrada y respuestas
+        EjercicioUtils.inicializarEntrada(app);
+    }
+
+    public static void procesarRespuesta(App app, String texto) {
+        String[] etiquetas = { "Número" };
+        int numero;
+
+        // Validar que sea un número entero
+        try {
+            numero = Integer.parseInt(texto);
+        } catch (NumberFormatException e) {
+            app.appendConsola("❌ Error: ingresa un número válido.\n");
             app.limpiarRespuestaField();
             app.requestFocusRespuesta();
-        } else {
-            app.setInputPanelVisible(false);
-
-            try {
-                int numero = Integer.parseInt(respuestas[0]);
-                int resto = numero % 2;
-                String parImpar;
-                if(resto==0) {
-                    parImpar = "par";
-                } else {
-                    parImpar = "impar";
-                }
-                app.appendConsola("El número "+numero+" es "+parImpar+".");
-            } catch (NumberFormatException e) {
-                app.appendConsola("Error: uno de los valores no es un número válido.\n");
-            }
+            return;
         }
+
+        // Guardar la respuesta y mostrarla
+        EjercicioUtils.procesarRespuesta(app, String.valueOf(numero), etiquetas, null);
+
+        // Avanzar a la siguiente pregunta
+        EjercicioUtils.avanzarPregunta(app);
+
+        // Si no quedan preguntas, calcular par o impar
+        if (app.getIndicePregunta() >= app.getPreguntas().length) {
+            evaluarParImpar(app, numero);
+        }
+    }
+
+    private static void evaluarParImpar(App app, int numero) {
+        app.setInputPanelVisible(false);
+        String parImpar = (numero % 2 == 0) ? "par" : "impar";
+        app.appendConsola("El número " + numero + " es " + parImpar + ".\n");
     }
 }

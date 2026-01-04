@@ -1,56 +1,50 @@
 package exercises;
+
 import main.App;
+import utils.EjercicioUtils;
 
 public class T4Ejercicio5 {
+
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 40 - Estaciones del año");
+        app.setTituloEjercicio("Ejercicio 5 Tema 4 - Estaciones del año");
         app.setPreguntas(new String[]{
-                "Introduce el número de mes"
+                "Introduce el número de mes (1-12)"
         });
-        app.setRespuestasTexto(new String[app.getPreguntas().length]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.limpiarConsola();
-        app.setInputPanelVisible(true);
-        app.requestFocusRespuesta();
+        EjercicioUtils.inicializarEntrada(app);
     }
+
     public static void procesarRespuesta(App app, String texto) {
-        int indice = app.getIndicePregunta();
-        String[] respuestas = app.getRespuestasTexto();
-        respuestas[indice] = texto;
-        String[] etiquetas = {
-                "Número de mes"
-
-        };
-        String[] unidades = {
-                "",
-                "",
-                ""
-        };
-        app.appendConsola(etiquetas[indice] + ": " + texto + " " + unidades[indice] + "\n");
-        app.setIndicePregunta(indice + 1);
-
-        if (app.getIndicePregunta() < app.getPreguntas().length) {
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
+        // Validar que sea un número de mes válido
+        int mes;
+        try {
+            mes = Integer.parseInt(texto);
+            if (mes < 1 || mes > 12) {
+                app.appendConsola("❌ Error: el mes debe estar entre 1 y 12.\n");
+                app.limpiarRespuestaField();
+                app.requestFocusRespuesta();
+                return;
+            }
+        } catch (NumberFormatException e) {
+            app.appendConsola("❌ Error: ingresa un número válido.\n");
             app.limpiarRespuestaField();
             app.requestFocusRespuesta();
-        } else {
-            app.setInputPanelVisible(false);
+            return;
+        }
 
-            try {
-                int mes = Integer.parseInt(respuestas[0]);
-                String estacion = switch(mes) {
-                    case 12, 1, 2 -> "Invierno";
-                    case 3, 4, 5 -> "Primavera";
-                    case 6, 7, 8 -> "Verano";
-                    case 9, 10, 11 -> "Otoño";
-                    default -> "No se ha introducido un número válido";
-                };
-                app.appendConsola(String.format("El mes %d es: %s\n", mes, estacion));
-            } catch (NumberFormatException e) {
-                app.appendConsola("Error: uno de los valores no es un número válido.\n");
-            }
+        // Guardar y mostrar la respuesta
+        EjercicioUtils.procesarRespuesta(app, texto, new String[]{"Número de mes"}, new String[]{""});
+        EjercicioUtils.avanzarPregunta(app);
+
+        // Mostrar estación
+        if (app.getIndicePregunta() >= app.getPreguntas().length) {
+            String estacion = switch (mes) {
+                case 12, 1, 2 -> "Invierno";
+                case 3, 4, 5 -> "Primavera";
+                case 6, 7, 8 -> "Verano";
+                case 9, 10, 11 -> "Otoño";
+                default -> "No válido"; // nunca debería pasar
+            };
+            app.appendConsola("El mes " + mes + " corresponde a: " + estacion + "\n");
         }
     }
 }

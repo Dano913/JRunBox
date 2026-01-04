@@ -4,7 +4,7 @@ import utils.EjercicioUtils;
 
 public class T1Ejercicio4 {
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 4 – Nombres descriptivos");
+        app.setTituloEjercicio("Ejercicio 4 Tema 1 – Nombres descriptivos");
         app.setPreguntas(new String[]{
                 "Ingresa el título del libro:",
                 "Ingresa el autor del libro:",

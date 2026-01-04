@@ -1,68 +1,69 @@
 package exercises;
+
 import main.App;
+import utils.EjercicioUtils;
 
 public class T3Ejercicio14 {
+
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 34 - Candidado a préstamo");
+        app.setTituloEjercicio("Ejercicio 14 Tema 3 - Candidato a préstamo");
         app.setPreguntas(new String[]{
                 "Introduce tu edad",
                 "Introduce tus ingresos mensuales",
                 "¿Tienes deudas?"
         });
-        app.setRespuestasTexto(new String[app.getPreguntas().length]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.limpiarConsola();
-        app.setInputPanelVisible(true);
-        app.requestFocusRespuesta();
+        EjercicioUtils.inicializarEntrada(app);
     }
+
     public static void procesarRespuesta(App app, String texto) {
         int indice = app.getIndicePregunta();
-        String[] respuestas = app.getRespuestasTexto();
-        respuestas[indice] = texto;
-        String[] etiquetas = {
-                "Edad",
-                "Ingresos mensuales",
-                "Deudas"
 
-        };
-        String[] unidades = {
-                "años",
-                "€",
-                ""
-        };
-        app.appendConsola(etiquetas[indice] + ": " + texto + " " + unidades[indice] + "\n");
-        app.setIndicePregunta(indice + 1);
-
-        if (app.getIndicePregunta() < app.getPreguntas().length) {
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
-        } else {
-            app.setInputPanelVisible(false);
-
+        // Validaciones según tipo de dato
+        if (indice == 0 || indice == 1) { // edad o ingresos
             try {
-                int edad = Integer.parseInt(respuestas[0]);
-                int ingreso = Integer.parseInt(respuestas[1]);
-                boolean deuda = Boolean.parseBoolean(respuestas[2]);
-                if(edad >= 21 && edad <= 65) {
-                    if(ingreso>=1000){
-                        if(!deuda){
-                            app.appendConsola("¡Enhorabuena! Puedes solicitar tu préstamo");
-                        } else {
-                            app.appendConsola("No puedes solicitar un préstamo debido a tus deudas");
-                        }
-                    } else {
-                        app.appendConsola("No tienes ingresos suficientes para solicitar un préstamo");
-                    }
+                Integer.parseInt(texto);
+            } catch (NumberFormatException e) {
+                app.appendConsola("❌ Error: ingresa un número válido.\n");
+                app.limpiarRespuestaField();
+                app.requestFocusRespuesta();
+                return;
+            }
+        } else if (indice == 2) { // deudas
+            if (!texto.equalsIgnoreCase("true") && !texto.equalsIgnoreCase("false")) {
+                app.appendConsola("❌ Error: ingresa 'true' o 'false'.\n");
+                app.limpiarRespuestaField();
+                app.requestFocusRespuesta();
+                return;
+            }
+        }
+
+        // Guardar y mostrar respuesta
+        EjercicioUtils.procesarRespuesta(app, texto,
+                new String[]{"Edad", "Ingresos mensuales", "Deudas"},
+                new String[]{"años", "€", ""});
+
+        EjercicioUtils.avanzarPregunta(app);
+
+        // Evaluar préstamo si ya se respondieron todas las preguntas
+        if (app.getIndicePregunta() >= app.getPreguntas().length) {
+            try {
+                int edad = Integer.parseInt(app.getRespuestasTexto()[0]);
+                int ingreso = Integer.parseInt(app.getRespuestasTexto()[1]);
+                boolean deuda = Boolean.parseBoolean(app.getRespuestasTexto()[2]);
+                app.setInputPanelVisible(false);
+
+                if (edad < 21 || edad > 65) {
+                    app.appendConsola("No tienes edad para solicitar un préstamo.\n");
+                } else if (ingreso < 1000) {
+                    app.appendConsola("No tienes ingresos suficientes para solicitar un préstamo.\n");
+                } else if (deuda) {
+                    app.appendConsola("No puedes solicitar un préstamo debido a tus deudas.\n");
                 } else {
-                    app.appendConsola("No tienes edad para solicitar un préstamo");
+                    app.appendConsola("¡Enhorabuena! Puedes solicitar tu préstamo.\n");
                 }
 
-
             } catch (NumberFormatException e) {
-                app.appendConsola("Error: uno de los valores no es un número válido.\n");
+                app.appendConsola("❌ Error inesperado: valores no válidos.\n");
             }
         }
     }

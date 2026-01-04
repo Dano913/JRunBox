@@ -1,60 +1,45 @@
 package exercises;
+
 import main.App;
+import utils.EjercicioUtils;
 
 public class T3Ejercicio12 {
+
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 32 - Validador de contraseña");
-        app.setPreguntas(new String[]{
-                "Introduce una contraseña"
-        });
-        app.setRespuestasTexto(new String[app.getPreguntas().length]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.limpiarConsola();
-        app.setInputPanelVisible(true);
-        app.requestFocusRespuesta();
+        app.setTituloEjercicio("Ejercicio 12 Tema 3 - Validador de contraseña");
+        app.setPreguntas(new String[]{ "Introduce una contraseña" });
+        EjercicioUtils.inicializarEntrada(app);
     }
+
     public static void procesarRespuesta(App app, String texto) {
-        int indice = app.getIndicePregunta();
-        String[] respuestas = app.getRespuestasTexto();
-        respuestas[indice] = texto;
-        String[] etiquetas = {
-                "Contraseña"
-
-        };
-        app.appendConsola(etiquetas[indice] + ": " + texto + "\n");
-        app.setIndicePregunta(indice + 1);
-
-        if (app.getIndicePregunta() < app.getPreguntas().length) {
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
+        // Validación de la contraseña
+        if (texto.equals("12345678") || texto.equalsIgnoreCase("password")) {
+            app.appendConsola("❌ No puedes usar esa contraseña.\n");
             app.limpiarRespuestaField();
             app.requestFocusRespuesta();
-        } else {
+            return;
+        }
+        if (texto.length() < 8) {
+            app.appendConsola("❌ La contraseña debe tener al menos 8 caracteres.\n");
+            app.limpiarRespuestaField();
+            app.requestFocusRespuesta();
+            return;
+        }
+        if (!texto.matches(".*\\d.*")) {
+            app.appendConsola("❌ La contraseña debe contener al menos un número.\n");
+            app.limpiarRespuestaField();
+            app.requestFocusRespuesta();
+            return;
+        }
+
+        // Guardar y mostrar respuesta automáticamente
+        EjercicioUtils.procesarRespuesta(app, texto, new String[]{ "Contraseña" }, new String[]{ "" });
+        EjercicioUtils.avanzarPregunta(app);
+
+        // Mostrar resultado final
+        if (app.getIndicePregunta() >= app.getPreguntas().length) {
             app.setInputPanelVisible(false);
-            try {
-                String password = respuestas[indice]; // la contraseña que escribió el usuario
-
-                // No puede ser "12345678" ni "password"
-                if (password.equals("12345678") || password.equalsIgnoreCase("password")) {
-                    app.appendConsola("No puedes poner esa contraseña, debe ser otra.\n");
-                }
-                // Debe tener al menos 8 caracteres
-                else if (password.length() < 8) {
-                    app.appendConsola("La contraseña debe tener al menos 8 caracteres.\n");
-                }
-                // Debe contener al menos un número
-                else if (!password.matches(".*\\d.*")) {
-                    app.appendConsola("La contraseña debe contener al menos un número.\n");
-                }
-                else {
-                    app.appendConsola("Contraseña válida: " + password + "\n");
-                }
-
-            } catch (Exception e) {
-                app.appendConsola("Error inesperado.\n");
-            }
-
+            app.appendConsola("✅ Contraseña válida: " + texto + "\n");
         }
     }
 }

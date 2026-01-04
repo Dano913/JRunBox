@@ -6,7 +6,7 @@ import utils.EjercicioUtils;
 public class T1Ejercicio6 {
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 6 – Operaciones aritméticas");
+        app.setTituloEjercicio("Ejercicio 6 Tema 1 – Operaciones aritméticas");
         app.setPreguntas(new String[]{
                 "Introduce un número",
                 "Introduce otro número"

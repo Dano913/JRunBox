@@ -1,51 +1,50 @@
 package exercises;
+
 import main.App;
+import utils.EjercicioUtils;
+
 public class T2Ejercicio6 {
+
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 16 - Calculadora de descuento");
+        app.setTituloEjercicio("Ejercicio 6 Tema 2 - Calculadora de descuento");
         app.setPreguntas(new String[]{
                 "¿Cuánto cuesta el producto?",
-                "¿Qué porcentaje de descuento tiene?",
+                "¿Qué porcentaje de descuento tiene?"
         });
-        app.setRespuestasTexto(new String[app.getPreguntas().length]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.limpiarConsola();
-        app.setInputPanelVisible(true);
-        app.requestFocusRespuesta();
+
+        // Inicializa panel de entrada y respuestas
+        EjercicioUtils.inicializarEntrada(app);
     }
+
     public static void procesarRespuesta(App app, String texto) {
-        int indice = app.getIndicePregunta();
+
+        String[] etiquetas = { "Precio del producto", "Descuento sobre el precio" };
+        String[] unidades = { "€", "%" };
+
+        // Guardar respuesta y mostrarla con unidad
+        EjercicioUtils.procesarRespuesta(app, texto, etiquetas, unidades);
+
+        // Avanzar a la siguiente pregunta
+        EjercicioUtils.avanzarPregunta(app);
+
+        // Si ya no quedan preguntas, calcular precio final
+        if (app.getIndicePregunta() >= app.getPreguntas().length) {
+            calcularDescuento(app);
+        }
+    }
+
+    private static void calcularDescuento(App app) {
         String[] respuestas = app.getRespuestasTexto();
-        respuestas[indice] = texto;
-        String[] etiquetas = {
-                "Precio del producto",
-                "Descuento sobre el precio",
-        };
-        String[] unidades = {
-                "€",
-                "%"
-        };
-        app.appendConsola(etiquetas[indice] + ": " + texto + " " + unidades[indice] + "\n");
-        app.setIndicePregunta(indice + 1);
 
-        if (app.getIndicePregunta() < app.getPreguntas().length) {
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
-        } else {
-            app.setInputPanelVisible(false);
+        try {
+            double precioOriginal = Double.parseDouble(respuestas[0]);
+            double descuento = Double.parseDouble(respuestas[1]);
+            double precioFinal = precioOriginal - precioOriginal * (descuento / 100);
 
-            try {
-                double originalPrice = Double.parseDouble(respuestas[0]);
-                double discount = Double.parseDouble(respuestas[1]);
-                double finalPrice = originalPrice - originalPrice*(discount/100);
-                app.appendConsola("El precio final con descuento es: "+finalPrice+" €.");
+            app.appendConsola("El precio final con descuento es: " + precioFinal + " €.\n");
 
-            } catch (NumberFormatException e) {
-                app.appendConsola("Error: uno de los valores no es un número válido.\n");
-            }
+        } catch (NumberFormatException e) {
+            app.appendConsola("Error: uno de los valores no es un número válido.\n");
         }
     }
 }

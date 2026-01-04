@@ -1,62 +1,68 @@
 package exercises;
+
 import main.App;
+import utils.EjercicioUtils;
 
 public class T4Ejercicio3 {
+
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 38 - Calculadora con switch");
+        app.setTituloEjercicio("Ejercicio 3 Tema 4 - Calculadora con switch");
         app.setPreguntas(new String[]{
                 "Introduce un número",
                 "Introduce otro número",
-                "Introduce la operación(+, -, *, /)"
+                "Introduce la operación (+, -, *, /)"
         });
-        app.setRespuestasTexto(new String[app.getPreguntas().length]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.limpiarConsola();
-        app.setInputPanelVisible(true);
-        app.requestFocusRespuesta();
+        EjercicioUtils.inicializarEntrada(app);
     }
+
     public static void procesarRespuesta(App app, String texto) {
         int indice = app.getIndicePregunta();
-        String[] respuestas = app.getRespuestasTexto();
-        respuestas[indice] = texto;
-        String[] etiquetas = {
-                "Primer número",
-                "Segundo número",
-                "Operación"
 
-        };
-        String[] unidades = {
-                "",
-                "",
-                ""
-        };
-        app.appendConsola(etiquetas[indice] + ": " + texto + " " + unidades[indice] + "\n");
-        app.setIndicePregunta(indice + 1);
-
-        if (app.getIndicePregunta() < app.getPreguntas().length) {
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
-        } else {
-            app.setInputPanelVisible(false);
-
+        // Validación de números
+        if (indice == 0 || indice == 1) {
             try {
-                int num1 = Integer.parseInt(respuestas[0]);
-                int num2 = Integer.parseInt(respuestas[1]);
-                char operando = respuestas[2].charAt(0);
-                double resultado = 0;
-                switch(operando) {
-                    case '+' -> {resultado = num1 + num2;}
-                    case '-' -> {resultado = num1 - num2;}
-                    case '*' -> {resultado = num1 * num2;}
-                    case '/' -> {resultado = (double)num1/num2;}
-                    default -> {app.appendConsola("Operación no esperada o inválida");}
-                }
-                app.appendConsola(String.format("%d %s %d = %.1f", num1, operando, num2, resultado));
+                Integer.parseInt(texto);
             } catch (NumberFormatException e) {
-                app.appendConsola("Error: uno de los valores no es un número válido.\n");
+                app.appendConsola("❌ Error: ingresa un número válido.\n");
+                app.limpiarRespuestaField();
+                app.requestFocusRespuesta();
+                return;
+            }
+        }
+
+        // Validación de operación
+        if (indice == 2) {
+            if (!"+-*/".contains(texto)) {
+                app.appendConsola("❌ Error: operación inválida, usa +, -, *, /\n");
+                app.limpiarRespuestaField();
+                app.requestFocusRespuesta();
+                return;
+            }
+        }
+
+        // Guardar y mostrar respuesta
+        EjercicioUtils.procesarRespuesta(app, texto, new String[]{"Primer número", "Segundo número", "Operación"}, new String[]{"", "", ""});
+        EjercicioUtils.avanzarPregunta(app);
+
+        // Si ya no hay más preguntas, calcular resultado
+        if (app.getIndicePregunta() >= app.getPreguntas().length) {
+            try {
+                int num1 = Integer.parseInt(app.getRespuestasTexto()[0]);
+                int num2 = Integer.parseInt(app.getRespuestasTexto()[1]);
+                char operando = app.getRespuestasTexto()[2].charAt(0);
+                double resultado;
+
+                resultado = switch (operando) {
+                    case '+' -> num1 + num2;
+                    case '-' -> num1 - num2;
+                    case '*' -> num1 * num2;
+                    case '/' -> (double) num1 / num2;
+                    default -> Double.NaN;
+                };
+
+                app.appendConsola(String.format("%d %s %d = %.2f\n", num1, operando, num2, resultado));
+            } catch (NumberFormatException e) {
+                app.appendConsola("Error inesperado: número inválido.\n");
             }
         }
     }

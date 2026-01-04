@@ -6,7 +6,7 @@ import utils.EjercicioUtils;
 public class T1Ejercicio10 {
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 10 – Conversión de temperaturas");
+        app.setTituloEjercicio("Ejercicio 10 Tema 1 – Conversión de temperaturas");
         app.setPreguntas(new String[]{
                 "Introduce la temperatura en °C:"
         });

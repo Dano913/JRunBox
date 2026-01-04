@@ -6,7 +6,7 @@ import utils.EjercicioUtils;
 public class T1Ejercicio8 {
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 8 – Área de rectángulo");
+        app.setTituloEjercicio("Ejercicio 8 Tema 1 – Área de rectángulo");
         app.setPreguntas(new String[]{
                 "¿Cuánto mide la base del rectángulo?",
                 "¿Cuánto mide la altura del rectángulo?"

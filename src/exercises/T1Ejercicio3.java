@@ -4,7 +4,7 @@ import utils.EjercicioUtils;
 
 public class T1Ejercicio3 {
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 3 – Tipos de variables");
+        app.setTituloEjercicio("Ejercicio 3 Tema 1 – Tipos de variables");
         app.setPreguntas(new String[]{
                 "Ingresa un nombre (String):",
                 "Ingresa la edad (int):",

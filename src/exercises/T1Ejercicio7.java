@@ -4,7 +4,7 @@ import utils.EjercicioUtils;
 
 public class T1Ejercicio7 {
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 7 – Presentación personal");
+        app.setTituloEjercicio("Ejercicio 7 Tema 1 – Presentación personal");
         app.setPreguntas(new String[]{
                 "Ingresa tu nombre",
                 "Ingresa tu apellido",

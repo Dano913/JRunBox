@@ -6,7 +6,7 @@ import utils.EjercicioUtils;
 public class T1Ejercicio5 {
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 5 – Uso de constantes");
+        app.setTituloEjercicio("Ejercicio 5 Tema 1 – Uso de constantes");
         app.setPreguntas(new String[]{
                 "¿Cómo se llama tu aplicación?",
                 "¿Cuál es la versión?",

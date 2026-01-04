@@ -5,8 +5,9 @@ import main.App;
 import utils.EjercicioUtils;
 
 public class T5Ejercicio6 {
+
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 51 - Cuenta atrás con while");
+        app.setTituloEjercicio("Ejercicio 6 Tema 5 - Cuenta atrás con while");
         app.setPreguntas(new String[]{"Introduce un número para la cuenta atrás"});
         EjercicioUtils.inicializarEntrada(app);
     }
@@ -15,6 +16,7 @@ public class T5Ejercicio6 {
         String[] etiquetas = {"Número introducido"};
         String[] unidades = {""};
 
+        // Guardamos la respuesta y la mostramos
         EjercicioUtils.procesarRespuesta(app, texto, etiquetas, unidades);
 
         int num;
@@ -27,13 +29,13 @@ public class T5Ejercicio6 {
             return;
         }
 
-        // Ocultamos el panel de entrada antes de empezar
+        // Ocultamos el panel de entrada
         app.setInputPanelVisible(false);
 
         // Ejecutamos la cuenta atrás en un hilo separado
         new Thread(() -> {
             int contador = num;
-            app.appendConsola("Cuenta atrás\n");
+            app.appendConsola("Cuenta atrás:\n");
             while (contador > 0) {
                 app.appendConsola(contador + "\n");
                 try {

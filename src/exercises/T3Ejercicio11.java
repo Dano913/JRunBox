@@ -1,62 +1,79 @@
 package exercises;
+
 import main.App;
+import utils.EjercicioUtils;
 
 public class T3Ejercicio11 {
+
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 31 - Sistema de descuentos por niveles");
+        app.setTituloEjercicio("Ejercicio 11 Tema 3 - Sistema de descuentos por niveles");
         app.setPreguntas(new String[]{
                 "Introduce el importe de la compra",
                 "¿Eres socio?"
         });
-        app.setRespuestasTexto(new String[app.getPreguntas().length]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.limpiarConsola();
-        app.setInputPanelVisible(true);
-        app.requestFocusRespuesta();
+        EjercicioUtils.inicializarEntrada(app);
     }
+
     public static void procesarRespuesta(App app, String texto) {
         int indice = app.getIndicePregunta();
-        String[] respuestas = app.getRespuestasTexto();
-        respuestas[indice] = texto;
-        String[] etiquetas = {
-                "Importe",
-                "Tarjeta de Socio"
+        String[] etiquetas = { "Importe", "Tarjeta de Socio" };
+        String[] unidades = { "€", "" };
 
-        };
-        String[] unidades = {
-                "€",
-                ""
-        };
-        app.appendConsola(etiquetas[indice] + ": " + texto + " " + unidades[indice] + "\n");
-        app.setIndicePregunta(indice + 1);
-
-        if (app.getIndicePregunta() < app.getPreguntas().length) {
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
-        } else {
-            app.setInputPanelVisible(false);
-
+        // Guardar y mostrar respuesta
+        if (indice == 0) {
+            // Validación de número para el importe
             try {
-                double importe = Double.parseDouble(respuestas[0]);
-                boolean socio = Boolean.parseBoolean(respuestas[1]);
-                double price20 = importe - importe*(20.0/100);
-                double price10 = importe - importe*(10.0/100);
-                double price05 = importe - importe*(5.0/100);
-                if(importe>=200 && socio){
-                    app.appendConsola("Tienes un descuento del 20%. El importe final es "+price20);
-                } else if(importe<200 && socio){
-                    app.appendConsola("Tienes un descuento del 10%. El importe final es "+price10);
-                } else if(!socio && importe>300) {
-                    app.appendConsola("Tienes un descuento del 5%. El importe final es "+price05);
-                } else {
-                    app.appendConsola("No tienes ningun descuento. El importe final es "+importe);
-                }
+                Double.parseDouble(texto);
             } catch (NumberFormatException e) {
-                app.appendConsola("Error: uno de los valores no es un número válido.\n");
+                app.appendConsola("❌ Error: ingresa un número válido.\n");
+                app.limpiarRespuestaField();
+                app.requestFocusRespuesta();
+                return;
             }
+        }
+
+        if (indice == 1) {
+            // Validación booleano para socio
+            if (!texto.equalsIgnoreCase("true") && !texto.equalsIgnoreCase("false")) {
+                app.appendConsola("❌ Error: ingresa 'true' o 'false'.\n");
+                app.limpiarRespuestaField();
+                app.requestFocusRespuesta();
+                return;
+            }
+        }
+
+        EjercicioUtils.procesarRespuesta(app, texto, etiquetas, unidades);
+        EjercicioUtils.avanzarPregunta(app);
+
+        // Si no quedan preguntas, calcular descuento
+        if (app.getIndicePregunta() >= app.getPreguntas().length) {
+            calcularDescuento(app);
+        }
+    }
+
+    private static void calcularDescuento(App app) {
+        app.setInputPanelVisible(false);
+
+        try {
+            double importe = Double.parseDouble(app.getRespuestasTexto()[0]);
+            boolean socio = Boolean.parseBoolean(app.getRespuestasTexto()[1]);
+            double finalPrice;
+
+            if (importe >= 200 && socio) {
+                finalPrice = importe * 0.8;
+                app.appendConsola("Tienes un descuento del 20%. El importe final es " + finalPrice + " €.\n");
+            } else if (importe < 200 && socio) {
+                finalPrice = importe * 0.9;
+                app.appendConsola("Tienes un descuento del 10%. El importe final es " + finalPrice + " €.\n");
+            } else if (!socio && importe > 300) {
+                finalPrice = importe * 0.95;
+                app.appendConsola("Tienes un descuento del 5%. El importe final es " + finalPrice + " €.\n");
+            } else {
+                finalPrice = importe;
+                app.appendConsola("No tienes ningún descuento. El importe final es " + finalPrice + " €.\n");
+            }
+        } catch (NumberFormatException e) {
+            app.appendConsola("Error inesperado: el valor del importe no es válido.\n");
         }
     }
 }

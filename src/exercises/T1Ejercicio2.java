@@ -4,7 +4,7 @@ import utils.EjercicioUtils;
 
 public class T1Ejercicio2 {
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 2 – Puntuaciones modificadas");
+        app.setTituloEjercicio("Ejercicio 2 Tema 1 – Puntuaciones modificadas");
         app.setPreguntas(new String[]{
                 "Cuántos puntos ganas en la primera modificación?",
                 "Cuántos puntos ganas en la segunda modificación?",

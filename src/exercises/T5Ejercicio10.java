@@ -79,10 +79,7 @@ public class T5Ejercicio10 {
                     tipoOperacion = "retirar";
 
                     app.setPreguntas(new String[]{"¿Cuánto deseas retirar?"});
-                    app.setIndicePregunta(0);
-                    app.setPreguntaLabel(app.getPreguntas()[0]);
-                    app.limpiarRespuestaField();
-                    app.requestFocusRespuesta();
+                    EjercicioUtils.inicializarEntrada(app);
                     return;
 
                 case 3:
@@ -93,10 +90,7 @@ public class T5Ejercicio10 {
                     tipoOperacion = "depositar";
 
                     app.setPreguntas(new String[]{"¿Cuánto deseas depositar?"});
-                    app.setIndicePregunta(0);
-                    app.setPreguntaLabel(app.getPreguntas()[0]);
-                    app.limpiarRespuestaField();
-                    app.requestFocusRespuesta();
+                    EjercicioUtils.inicializarEntrada(app);
                     return;
 
                 case 4:
@@ -130,10 +124,7 @@ public class T5Ejercicio10 {
                             ? "¿Cuánto deseas retirar?"
                             : "¿Cuánto deseas depositar?"
             });
-            app.setIndicePregunta(0);
-            app.setPreguntaLabel(app.getPreguntas()[0]);
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.inicializarEntrada(app);
             return;
         }
 
@@ -152,10 +143,7 @@ public class T5Ejercicio10 {
             app.appendConsola("🔄 Por favor, ingresa una cantidad válida.\n\n");
 
             app.setPreguntas(new String[]{"¿Cuánto deseas retirar?"});
-            app.setIndicePregunta(0);
-            app.setPreguntaLabel(app.getPreguntas()[0]);
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.inicializarEntrada(app);
             return; // Sale y espera nueva cantidad
         }
 
@@ -164,10 +152,7 @@ public class T5Ejercicio10 {
             app.appendConsola("❌ La cantidad debe ser positiva.\n\n");
 
             app.setPreguntas(new String[]{"¿Cuánto deseas retirar?"});
-            app.setIndicePregunta(0);
-            app.setPreguntaLabel(app.getPreguntas()[0]);
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.inicializarEntrada(app);
             return;
         }
 
@@ -191,10 +176,7 @@ public class T5Ejercicio10 {
             app.appendConsola("🔄 Por favor, ingresa una cantidad válida.\n\n");
 
             app.setPreguntas(new String[]{"¿Cuánto deseas depositar?"});
-            app.setIndicePregunta(0);
-            app.setPreguntaLabel(app.getPreguntas()[0]);
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.inicializarEntrada(app);
             return; // Sale y espera nueva cantidad
         }
 

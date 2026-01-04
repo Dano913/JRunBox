@@ -1,57 +1,61 @@
 package exercises;
+
 import main.App;
+import utils.EjercicioUtils;
 
 public class T3Ejercicio9 {
+
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 29 - Calculadora ICM");
+        app.setTituloEjercicio("Ejercicio 9 Tema 3 - Calculadora IMC");
         app.setPreguntas(new String[]{
                 "Introduce tu peso en kilogramos",
                 "Introduce tu altura en metros"
         });
-        app.setRespuestasTexto(new String[app.getPreguntas().length]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.limpiarConsola();
-        app.setInputPanelVisible(true);
-        app.requestFocusRespuesta();
+        EjercicioUtils.inicializarEntrada(app);
     }
-    public static void procesarRespuesta(App app, String texto) {
-        int indice = app.getIndicePregunta();
-        String[] respuestas = app.getRespuestasTexto();
-        respuestas[indice] = texto;
-        String[] etiquetas = {
-                "Peso",
-                "Altura"
-        };
-        String[] unidades = {
-                "kg",
-                "m"
-        };
-        app.appendConsola(etiquetas[indice] + ": " + texto + " " + unidades[indice] + "\n");
-        app.setIndicePregunta(indice + 1);
 
-        if (app.getIndicePregunta() < app.getPreguntas().length) {
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
+    public static void procesarRespuesta(App app, String texto) {
+        String[] etiquetas = { "Peso", "Altura" };
+        String[] unidades = { "kg", "m" };
+        double valor;
+
+        // Validación del número
+        try {
+            valor = Double.parseDouble(texto);
+        } catch (NumberFormatException e) {
+            app.appendConsola("❌ Error: ingresa un número válido.\n");
             app.limpiarRespuestaField();
             app.requestFocusRespuesta();
-        } else {
-            app.setInputPanelVisible(false);
-
-            try {
-                double peso = Double.parseDouble(respuestas[0]);
-                double altura = Double.parseDouble(respuestas[1]);
-                double IMC = peso / (altura*altura);
-                if(IMC<18.5) {
-                    app.appendConsola("Tienes un IMC de"+IMC+" puntos. Estás por debajo del peso normal.");
-                } else if(IMC>24.9){
-                    app.appendConsola("Tienes un IMC de"+IMC+" puntos. Estás por encima del peso normal.");
-                } else {
-                    app.appendConsola("Tienes un IMC de"+IMC+" puntos. Estás en tu peso ideal.");
-                }
-            } catch (NumberFormatException e) {
-                app.appendConsola("Error: uno de los valores no es un número válido.\n");
-            }
+            return;
         }
+
+        // Guardar y mostrar la respuesta
+        EjercicioUtils.procesarRespuesta(app, String.valueOf(valor), etiquetas, unidades);
+        EjercicioUtils.avanzarPregunta(app);
+
+        // Si ya no quedan preguntas, calcular IMC
+        if (app.getIndicePregunta() >= app.getPreguntas().length) {
+            calcularIMC(app);
+        }
+    }
+
+    private static void calcularIMC(App app) {
+        app.setInputPanelVisible(false);
+        String[] respuestas = app.getRespuestasTexto();
+
+        double peso = Double.parseDouble(respuestas[0]);
+        double altura = Double.parseDouble(respuestas[1]);
+        double IMC = peso / (altura * altura);
+
+        String mensaje;
+        if (IMC < 18.5) {
+            mensaje = "Estás por debajo del peso normal.";
+        } else if (IMC > 24.9) {
+            mensaje = "Estás por encima del peso normal.";
+        } else {
+            mensaje = "Estás en tu peso ideal.";
+        }
+
+        app.appendConsola("Tienes un IMC de " + String.format("%.2f", IMC) + " puntos. " + mensaje + "\n");
     }
 }

@@ -1,53 +1,41 @@
 package exercises;
 import main.App;
+import utils.EjercicioUtils;
 
 public class T4Ejercicio9 {
+
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 44 - Factorial con for");
-        app.setPreguntas(new String[]{
-                "Introduce un número entero positivo"
-        });
-        app.setRespuestasTexto(new String[app.getPreguntas().length]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.limpiarConsola();
-        app.setInputPanelVisible(true);
-        app.requestFocusRespuesta();
+        app.setTituloEjercicio("Ejercicio 9 Tema 4 - Factorial con for");
+        app.setPreguntas(new String[]{"Introduce un número entero positivo"});
+        EjercicioUtils.inicializarEntrada(app);
     }
+
     public static void procesarRespuesta(App app, String texto) {
-        int indice = app.getIndicePregunta();
-        String[] respuestas = app.getRespuestasTexto();
-        respuestas[indice] = texto;
-        String[] etiquetas = {
-                "Número"
+        int num1;
 
-        };
-        String[] unidades = {
-                ""
-        };
-        app.appendConsola(etiquetas[indice] + ": " + texto + " " + unidades[indice] + "\n");
-        app.setIndicePregunta(indice + 1);
-
-        if (app.getIndicePregunta() < app.getPreguntas().length) {
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
+        // Validar número
+        try {
+            num1 = Integer.parseInt(texto);
+            if (num1 < 0) throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            app.appendConsola("❌ Error: ingresa un número entero positivo.\n");
             app.limpiarRespuestaField();
             app.requestFocusRespuesta();
-        } else {
+            return;
+        }
+
+        // Guardar y mostrar respuesta
+        EjercicioUtils.procesarRespuesta(app, texto, new String[]{"Número"}, new String[]{""});
+        EjercicioUtils.avanzarPregunta(app);
+
+        if (app.getIndicePregunta() >= app.getPreguntas().length) {
             app.setInputPanelVisible(false);
 
-            try {
-                int num1 = Integer.parseInt(respuestas[0]);
-                long factorial = 1;
-                for (int i = 1; i <= num1; i++) {
-                    factorial *= i;
-                }
+            // Calcular factorial
+            long factorial = 1;
+            for (int i = 1; i <= num1; i++) factorial *= i;
 
-                app.appendConsola(String.format("Factorial de %d es %d%n", num1, factorial));
-
-            } catch (NumberFormatException e) {
-                app.appendConsola("Error: uno de los valores no es un número válido.\n");
-            }
+            app.appendConsola(String.format("Factorial de %d es %d%n", num1, factorial));
         }
     }
 }

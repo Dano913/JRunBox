@@ -10,7 +10,7 @@ public class T5Ejercicio5 {
     private static boolean activo = true;
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 5 - Menú interactivo con do-while y switch");
+        app.setTituloEjercicio("Ejercicio 5 Tema 5 - Menú interactivo con do-while y switch");
         app.setPreguntas(new String[]{
                 "Menú: 1 = Saludar 2 = Despedirse 3 = Ver hora actual 4 = Salir Elige una opción:"
         });
@@ -66,9 +66,6 @@ public class T5Ejercicio5 {
     }
 
     private static void reiniciarEntrada(App app) {
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.requestFocusRespuesta();
+        EjercicioUtils.inicializarEntrada(app);
     }
 }

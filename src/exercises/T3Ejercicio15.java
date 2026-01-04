@@ -1,71 +1,68 @@
 package exercises;
+
 import main.App;
+import utils.EjercicioUtils;
 
 public class T3Ejercicio15 {
+
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 35 - Sistema de envío");
+        app.setTituloEjercicio("Ejercicio 15 Tema 3 - Sistema de envío");
         app.setPreguntas(new String[]{
                 "Introduce el peso del paquete(kg)",
                 "Introduce la distancia del envío(km)",
                 "¿Es envío urgente?"
         });
-        app.setRespuestasTexto(new String[app.getPreguntas().length]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.limpiarConsola();
-        app.setInputPanelVisible(true);
-        app.requestFocusRespuesta();
+        EjercicioUtils.inicializarEntrada(app);
     }
+
     public static void procesarRespuesta(App app, String texto) {
         int indice = app.getIndicePregunta();
-        String[] respuestas = app.getRespuestasTexto();
-        respuestas[indice] = texto;
-        String[] etiquetas = {
-                "Peso",
-                "Distancia",
-                "Urgente"
 
-        };
-        String[] unidades = {
-                "kg",
-                "km",
-                ""
-        };
-        app.appendConsola(etiquetas[indice] + ": " + texto + " " + unidades[indice] + "\n");
-        app.setIndicePregunta(indice + 1);
-
-        if (app.getIndicePregunta() < app.getPreguntas().length) {
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
-        } else {
-            app.setInputPanelVisible(false);
-
+        // Validaciones
+        if (indice == 0 || indice == 1) { // peso o distancia
             try {
-                double precioBase = 5;
-                double peso = Double.parseDouble(respuestas[0]);
-                double pesoGratis = 5;
-                double pesoExceso = peso - pesoGratis;
-                double distancia = Double.parseDouble(respuestas[1]);
-                double distanciaGratis = 100;
-                double distanciaExceso = distancia -distanciaGratis;
-                boolean urgente = Boolean.parseBoolean(respuestas[2]);
-                double costeEnvio = precioBase;
-                if (peso > pesoGratis) {
-                    costeEnvio += pesoExceso * 2;
-                }
-                if (distancia > distanciaGratis) {
-                    costeEnvio += 10;
-                }
-                if (urgente) {
-                    costeEnvio *= 1.5; // se aplica sobre el total acumulado
-                }
+                Double.parseDouble(texto);
+            } catch (NumberFormatException e) {
+                app.appendConsola("❌ Error: ingresa un número válido.\n");
+                app.limpiarRespuestaField();
+                app.requestFocusRespuesta();
+                return;
+            }
+        } else if (indice == 2) { // urgente
+            if (!texto.equalsIgnoreCase("true") && !texto.equalsIgnoreCase("false")) {
+                app.appendConsola("❌ Error: ingresa 'true' o 'false'.\n");
+                app.limpiarRespuestaField();
+                app.requestFocusRespuesta();
+                return;
+            }
+        }
 
-                app.appendConsola("El coste total del envío es " + costeEnvio);
+        // Guardar y mostrar respuesta
+        EjercicioUtils.procesarRespuesta(app, texto,
+                new String[]{"Peso", "Distancia", "Urgente"},
+                new String[]{"kg", "km", ""});
+
+        EjercicioUtils.avanzarPregunta(app);
+
+        // Calcular coste si ya se respondieron todas las preguntas
+        if (app.getIndicePregunta() >= app.getPreguntas().length) {
+            try {
+                double peso = Double.parseDouble(app.getRespuestasTexto()[0]);
+                double distancia = Double.parseDouble(app.getRespuestasTexto()[1]);
+                boolean urgente = Boolean.parseBoolean(app.getRespuestasTexto()[2]);
+
+                double costeEnvio = 5; // precio base
+                double pesoExceso = Math.max(0, peso - 5);
+                double distanciaExceso = Math.max(0, distancia - 100);
+
+                costeEnvio += pesoExceso * 2;
+                if (distanciaExceso > 0) costeEnvio += 10;
+                if (urgente) costeEnvio *= 1.5;
+
+                app.appendConsola("El coste total del envío es " + costeEnvio + " €.\n");
 
             } catch (NumberFormatException e) {
-                app.appendConsola("Error: uno de los valores no es un número válido.\n");
+                app.appendConsola("❌ Error inesperado: valores no válidos.\n");
             }
         }
     }

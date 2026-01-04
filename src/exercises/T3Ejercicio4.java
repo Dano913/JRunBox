@@ -1,51 +1,58 @@
 package exercises;
+
 import main.App;
+import utils.EjercicioUtils;
 
 public class T3Ejercicio4 {
+
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 24 - Compra con descuento");
+        app.setTituloEjercicio("Ejercicio 4 Tema 3 - Compra con descuento");
         app.setPreguntas(new String[]{
                 "Introduce el importe de la compra",
-                "Introduce el descuento aplicado",
+                "Introduce el descuento aplicado"
         });
-        app.setRespuestasTexto(new String[app.getPreguntas().length]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.limpiarConsola();
-        app.setInputPanelVisible(true);
-        app.requestFocusRespuesta();
-    }
-    public static void procesarRespuesta(App app, String texto) {
-        int indice = app.getIndicePregunta();
-        String[] respuestas = app.getRespuestasTexto();
-        respuestas[indice] = texto;
-        String[] etiquetas = {
-                "Importe",
-                "Descuento"
-        };
-        String[] unidades = {
-                "€",
-                "%"
-        };
-        app.appendConsola(etiquetas[indice] + ": " + texto + " " + unidades[indice] + "\n");
-        app.setIndicePregunta(indice + 1);
 
-        if (app.getIndicePregunta() < app.getPreguntas().length) {
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
+        // Inicializa panel de entrada y respuestas
+        EjercicioUtils.inicializarEntrada(app);
+    }
+
+    public static void procesarRespuesta(App app, String texto) {
+        String[] etiquetas = { "Importe", "Descuento" };
+        String[] unidades = { "€", "%" };
+        double valor;
+
+        // Validar que el usuario introduce un número
+        try {
+            valor = Double.parseDouble(texto);
+        } catch (NumberFormatException e) {
+            app.appendConsola("❌ Error: ingresa un número válido.\n");
             app.limpiarRespuestaField();
             app.requestFocusRespuesta();
-        } else {
-            app.setInputPanelVisible(false);
+            return;
+        }
 
-            try {
-                double importe = Double.parseDouble(respuestas[0]);
-                double descuento = Double.parseDouble(respuestas[1]);
-                double finalPrice = importe - importe*(descuento/100);
-                app.appendConsola("El importe final es"+finalPrice+".");
-            } catch (NumberFormatException e) {
-                app.appendConsola("Error: uno de los valores no es un número válido.\n");
-            }
+        // Guardar respuesta y mostrarla
+        EjercicioUtils.procesarRespuesta(app, String.valueOf(valor), etiquetas, unidades);
+
+        // Avanzar a la siguiente pregunta
+        EjercicioUtils.avanzarPregunta(app);
+
+        // Si no quedan preguntas, calcular precio final
+        if (app.getIndicePregunta() >= app.getPreguntas().length) {
+            calcularPrecioFinal(app);
+        }
+    }
+
+    private static void calcularPrecioFinal(App app) {
+        app.setInputPanelVisible(false);
+        try {
+            double importe = Double.parseDouble(app.getRespuestasTexto()[0]);
+            double descuento = Double.parseDouble(app.getRespuestasTexto()[1]);
+            double finalPrice = importe - importe * (descuento / 100);
+
+            app.appendConsola(String.format("El importe final es: %.2f €.\n", finalPrice));
+        } catch (NumberFormatException e) {
+            app.appendConsola("Error inesperado: uno de los valores no es válido.\n");
         }
     }
 }

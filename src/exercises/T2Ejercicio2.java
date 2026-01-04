@@ -1,50 +1,53 @@
 package exercises;
+
 import main.App;
+import utils.EjercicioUtils;
+
 public class T2Ejercicio2 {
+
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 12 - Números comparados");
+        app.setTituloEjercicio("Ejercicio 2 Tema 2 - Números comparados");
         app.setPreguntas(new String[]{
-                "Introudce el primer número",
+                "Introduce el primer número",
                 "Introduce el segundo número"
         });
-        app.setRespuestasTexto(new String[app.getPreguntas().length]);
-        app.setIndicePregunta(0);
-        app.setPreguntaLabel(app.getPreguntas()[0]);
-        app.limpiarRespuestaField();
-        app.setInputPanelVisible(true);
-        app.limpiarConsola();
-        app.requestFocusRespuesta();
+        // Inicializa entradas usando EjercicioUtils para no repetir código
+        EjercicioUtils.inicializarEntrada(app);
     }
-    public static void procesarRespuesta(App app, String texto){
-        int indice = app.getIndicePregunta();
-        String [] respuestas = app.getRespuestasTexto();
-        respuestas[indice] = texto;
-        String[] etiquetas = {
-                "Primer número",
-                "Segundo número"
-        };
-        app.appendConsola(etiquetas[indice] + ": " + texto + "\n");
-        app.setIndicePregunta(indice + 1);
 
-        if (app.getIndicePregunta() < app.getPreguntas().length) {
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
-        } else {
-            app.setInputPanelVisible(false);
+    public static void procesarRespuesta(App app, String texto) {
 
-            try {
-                 double num1 = Double.parseDouble(respuestas[0]);
-                 double num2 = Double.parseDouble(respuestas[1]);
-                 app.appendConsola("\nCOMPARACIONES\n");
-                app.appendConsola(num1 + " > " + num2 + " ? " + (num1 > num2) + "\n");
-                app.appendConsola(num1 + " < " + num2 + " ? " + (num1 < num2) + "\n");
-                app.appendConsola(num1 + " == " + num2 + " ? " + (num1 == num2) + "\n");
-                app.appendConsola(num1 + " >= " + num2 + " ? " + (num1 >= num2) + "\n");
-                app.appendConsola(num1 + " <= " + num2 + " ? " + (num1 <= num2) + "\n");
-            } catch (NumberFormatException e) {
-                app.appendConsola("Error: uno de los valores no es un número válido.\n");
-            }
+        String[] etiquetas = { "Primer número", "Segundo número" };
+
+        // Guardar la respuesta y mostrarla en consola
+        EjercicioUtils.procesarRespuesta(app, texto, etiquetas, null);
+
+        // Avanzar a la siguiente pregunta
+        EjercicioUtils.avanzarPregunta(app);
+
+        // Si ya no hay más preguntas, realizar comparaciones
+        if (app.getIndicePregunta() >= app.getPreguntas().length) {
+            compararNumeros(app);
+        }
+    }
+
+    private static void compararNumeros(App app) {
+
+        String[] respuestas = app.getRespuestasTexto();
+
+        try {
+            double num1 = Double.parseDouble(respuestas[0]);
+            double num2 = Double.parseDouble(respuestas[1]);
+
+            app.appendConsola("\nCOMPARACIONES\n");
+            app.appendConsola(num1 + " > " + num2 + " ? " + (num1 > num2) + "\n");
+            app.appendConsola(num1 + " < " + num2 + " ? " + (num1 < num2) + "\n");
+            app.appendConsola(num1 + " == " + num2 + " ? " + (num1 == num2) + "\n");
+            app.appendConsola(num1 + " >= " + num2 + " ? " + (num1 >= num2) + "\n");
+            app.appendConsola(num1 + " <= " + num2 + " ? " + (num1 <= num2) + "\n");
+
+        } catch (NumberFormatException e) {
+            app.appendConsola("Error: uno de los valores no es un número válido.\n");
         }
     }
 }

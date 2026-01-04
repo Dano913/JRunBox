@@ -3,7 +3,7 @@ import main.App;
 
 public class T3Ejercicio6 {
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 26 - Acceso a contenido");
+        app.setTituloEjercicio("Ejercicio 6 Tema 3 - Acceso a contenido");
         app.setPreguntas(new String[]{
                 "Introduce tu edad"
         });

@@ -41,10 +41,7 @@ public class T5Ejercicio8 {
             // Si no es válido, preparar para nueva entrada
             if (!valido) {
                 app.appendConsola("Por favor, intenta de nuevo.\n\n");
-                app.setIndicePregunta(0);
-                app.setPreguntaLabel(app.getPreguntas()[0]);
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.inicializarEntrada(app);
                 return; // Sale del método para esperar nueva entrada
             }
 
