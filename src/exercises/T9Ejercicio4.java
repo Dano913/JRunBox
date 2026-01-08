@@ -12,7 +12,7 @@ public class T9Ejercicio4 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 4 - Buscar número en la matriz");
+        app.setTituloEjercicio("Ejercicio 4 Tema 9 - Buscar número en la matriz");
         app.setPreguntas(new String[]{
                 "Introduce un número para comprobar si está en la matriz"
         });
@@ -80,7 +80,7 @@ public class T9Ejercicio4 {
             app.appendConsola("Por favor, introduce un número válido o 'salir' para terminar.\n");
         }
 
-        // Limpiar el input después de cada intento
-        app.limpiarRespuestaField();
+        // Limpiar input y devolver foco
+        EjercicioUtils.limpiarRespuestaYFoco(app);
     }
 }

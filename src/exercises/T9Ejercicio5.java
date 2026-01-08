@@ -10,7 +10,7 @@ public class T9Ejercicio5 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 5 - Promedio de cada fila de la matriz");
+        app.setTituloEjercicio("Ejercicio 5 Tema 9 - Promedio de cada fila de la matriz");
         app.setPreguntas(new String[]{
                 "Presiona enter para crear la matriz"
         });

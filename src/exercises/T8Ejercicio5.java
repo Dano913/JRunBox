@@ -9,7 +9,7 @@ public class T8Ejercicio5 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 5 - Contar elementos que cumplan una condición");
+        app.setTituloEjercicio("Ejercicio 5 Tema 8 - Contar elementos que cumplan una condición");
         app.setPreguntas(new String[]{
                 "Pulsa enter para generar array",
         });

@@ -6,7 +6,7 @@ import utils.EjercicioUtils;
 public class T9Ejercicio1 {
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 1 - Crear y mostrar una matriz");
+        app.setTituloEjercicio("Ejercicio 1 Tema 9 - Crear y mostrar una matriz");
         // Pregunta opcional o de ejemplo
         app.setPreguntas(new String[]{
                 "Presiona enter para crear la matriz"

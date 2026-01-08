@@ -10,7 +10,7 @@ public class T8Ejercicio3 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 3 - Rellenar array con input del usuario");
+        app.setTituloEjercicio("Ejercicio 3 Tema 8 - Rellenar array con input del usuario");
 
         app.setPreguntas(new String[]{
                 "Introduce el primer nombre",

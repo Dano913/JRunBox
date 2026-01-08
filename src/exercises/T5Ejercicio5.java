@@ -23,7 +23,6 @@ public class T5Ejercicio5 {
         String[] unidades = {""};
         EjercicioUtils.procesarRespuesta(app, texto, etiquetas, unidades);
         int opcion;
-
         try {
             opcion = Integer.parseInt(texto);
         } catch (NumberFormatException e) {
@@ -31,8 +30,6 @@ public class T5Ejercicio5 {
             reiniciarEntrada(app);
             return;
         }
-
-        // Simulación del do-while: se repite mientras "activo" sea true
         do {
             switch (opcion) {
                 case 1:
@@ -58,10 +55,8 @@ public class T5Ejercicio5 {
                     app.appendConsola("⚠️ Opción no válida. Introduce un número entre 1 y 4.\n");
                     break;
             }
-
-            // Si no ha salido, se prepara para pedir otra opción
             reiniciarEntrada(app);
-            return; // vuelve al bucle visual
+            return;
         } while (activo);
     }
 

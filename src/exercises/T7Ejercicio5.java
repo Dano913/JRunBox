@@ -5,7 +5,7 @@ import utils.EjercicioUtils;
 public class T7Ejercicio5 {
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 5 - Calculador con switch");
+        app.setTituloEjercicio("Ejercicio 5 Tema 7 - Calculador con switch");
         app.setPreguntas(new String[]{
                 "Introduce un número",
                 "Introduce otro número",

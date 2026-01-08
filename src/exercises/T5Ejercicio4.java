@@ -13,54 +13,40 @@ public class T5Ejercicio4 {
         app.setTituloEjercicio("Ejercicio 4 Tema 5 - Adivina el número (do-while)");
         app.setPreguntas(new String[]{"Adivina el número (entre 1 y 10)"});
         EjercicioUtils.inicializarEntrada(app);
-
         numeroSecreto = new Random().nextInt(10) + 1;
         contador = 0;
-
         app.appendConsola("Se ha generado un número secreto entre 1 y 10.\n");
     }
 
     public static void procesarRespuesta(App app, String texto) {
-
         app.appendConsola("Número introducido: " + texto + "\n");
-
         int num;
         try {
             num = Integer.parseInt(texto);
         } catch (NumberFormatException e) {
             app.appendConsola("❌ Introduce un número válido.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
-
         boolean correcto;
-
         do {
             contador++;
-
             if (num < 1 || num > 10) {
                 app.appendConsola("❌ El número debe estar entre 1 y 10.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
-
             correcto = num == numeroSecreto;
-
             if (!correcto) {
                 if (num < numeroSecreto) {
                     app.appendConsola("El número secreto es MAYOR.\n");
                 } else {
                     app.appendConsola("El número secreto es MENOR.\n");
                 }
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return; // ⬅️ simula repetición del do-while
             }
-
         } while (!correcto);
-
         app.appendConsola("✅ ¡Correcto! Has adivinado el número.\n");
         app.appendConsola("Intentos realizados: " + contador + "\n");
         app.setInputPanelVisible(false);

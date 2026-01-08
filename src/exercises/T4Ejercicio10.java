@@ -15,37 +15,28 @@ public class T4Ejercicio10 {
 
     public static void procesarRespuesta(App app, String texto) {
         int indice = app.getIndicePregunta();
-
-        // Validación numérica según la pregunta
         if (indice == 0 || indice == 1) {
             try {
                 int valor = Integer.parseInt(texto);
                 if (valor <= 0) throw new NumberFormatException();
             } catch (NumberFormatException e) {
                 app.appendConsola("❌ Error: ingresa un número válido.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
         }
-
-        // Guardar y mostrar respuesta
         EjercicioUtils.procesarRespuesta(app, texto, new String[]{"Ejercicio", "Repeticiones"}, new String[]{"", ""});
         EjercicioUtils.avanzarPregunta(app);
-
         if (app.getIndicePregunta() >= app.getPreguntas().length) {
             app.setInputPanelVisible(false);
-
             int ejercicio = Integer.parseInt(app.getRespuestasTexto()[0]);
             int repes = Integer.parseInt(app.getRespuestasTexto()[1]);
-
             String mensaje = switch(ejercicio) {
                 case 1 -> "Flexiones";
                 case 2 -> "Abdominales";
                 case 3 -> "Sentadillas";
                 default -> null;
             };
-
             if (mensaje != null) {
                 app.appendConsola(String.format("Has elegido el ejercicio %s%n", mensaje));
                 for (int i = 1; i <= repes; i++) {

@@ -4,7 +4,7 @@ import utils.EjercicioUtils;
 
 public class T6Ejercicio2 {
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 2 - Compra con IVA");
+        app.setTituloEjercicio("Ejercicio 2 Tema 6 - Compra con IVA");
         app.setPreguntas(new String[]{
                 "Introduce el valor de la compra(IVA incluido)",
                 "Introduce el valor del IVA(valor entero)",

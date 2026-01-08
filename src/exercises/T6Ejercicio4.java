@@ -4,7 +4,7 @@ import utils.EjercicioUtils;
 
 public class T6Ejercicio4 {
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 2 - Compra con IVA");
+        app.setTituloEjercicio("Ejercicio 4 Tema 6 - Conversor de segundos a horas y minutos");
         app.setPreguntas(new String[]{
                 "Introduce el número de segundos",
         });

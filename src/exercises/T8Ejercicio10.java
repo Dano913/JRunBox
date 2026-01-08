@@ -9,7 +9,7 @@ public class T8Ejercicio10 {
     private static boolean faseCalificaciones = false; // indica si estamos introduciendo calificaciones
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 10 - Sistema de calificaciones con arrays");
+        app.setTituloEjercicio("Ejercicio 10 Tema 8 - Sistema de calificaciones con arrays");
 
         app.setPreguntas(new String[]{
                 "Introduce el número de alumnos"
@@ -28,8 +28,7 @@ public class T8Ejercicio10 {
                 if (numAlumnos <= 0) throw new NumberFormatException();
             } catch (NumberFormatException e) {
                 app.appendConsola("Por favor, introduce un número válido de alumnos.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
 
@@ -43,10 +42,7 @@ public class T8Ejercicio10 {
             }
 
             app.setPreguntas(preguntasAlumnos);
-            app.setIndicePregunta(0); // reiniciar índice
-            app.setPreguntaLabel(app.getPreguntas()[0]);
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.inicializarEntrada(app);
 
             faseCalificaciones = true; // pasamos a fase de calificaciones
             app.appendConsola("Array creado para " + numAlumnos + " alumnos. Ahora introduce las calificaciones.\n");
@@ -60,8 +56,7 @@ public class T8Ejercicio10 {
                 if (calificacion < 0 || calificacion > 10) throw new NumberFormatException();
             } catch (NumberFormatException e) {
                 app.appendConsola("Introduce un valor válido entre 0 y 10.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
 

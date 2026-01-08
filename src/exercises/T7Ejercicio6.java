@@ -14,7 +14,7 @@ public class T7Ejercicio6 {
     }
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 6 - Generador de Mensajes de Saludo");
+        app.setTituloEjercicio("Ejercicio 6 Tema 7 - Generador de Mensajes de Saludo");
         // Solo se mostrará esta vez
         app.setPreguntas(new String[]{
                 "¡Hola! (Pulsa Enter para continuar)"

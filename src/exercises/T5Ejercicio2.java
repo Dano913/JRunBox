@@ -24,9 +24,8 @@ public class T5Ejercicio2 {
 
             if (!correcta) {
                 app.appendConsola("❌ Contraseña incorrecta. Inténtalo de nuevo.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
-                return; // ⬅️ simula la repetición del do-while
+                EjercicioUtils.limpiarRespuestaYFoco(app);
+                return;
             }
 
         } while (!correcta);

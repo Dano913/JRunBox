@@ -17,8 +17,7 @@ public class T5Ejercicio1 {
             if (valor <= 0) throw new NumberFormatException();
         } catch (NumberFormatException e) {
             app.appendConsola("❌ Error: ingresa un número válido mayor que 0.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
 

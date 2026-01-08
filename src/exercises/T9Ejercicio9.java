@@ -11,7 +11,7 @@ public class T9Ejercicio9 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 8 - Contar paraes e impares en una matriz");
+        app.setTituloEjercicio("Ejercicio 9 Tema 9 - Tabla de multiplicar en una matriz");
         app.setPreguntas(new String[]{
                 "Presiona enter para crear la matriz"
         });
@@ -19,7 +19,7 @@ public class T9Ejercicio9 {
         EjercicioUtils.inicializarEntrada(app);
     }
 
-    // Procesa la respuesta: genera la matriz, la muestra y calcula el promedio de cada fila
+    // Genera la matriz
     public static void procesarRespuesta(App app, String texto) {
         // Generar matriz
         for (int i = 0; i < 10; i++) {

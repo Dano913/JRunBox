@@ -9,7 +9,7 @@ public class T8Ejercicio9 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 9 - Invertir el orden de un array");
+        app.setTituloEjercicio("Ejercicio 9 Tema 8 - Invertir el orden de un array");
         app.setPreguntas(new String[]{
                 "Pulsa enter para generar array",
         });

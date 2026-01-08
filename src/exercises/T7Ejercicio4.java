@@ -23,11 +23,12 @@ public class T7Ejercicio4 {
     private static String[] platosActuales;
     private static boolean esperandoCategoria = true;
     private static categoriaPlato categoriaActual;
-    private static final Map<categoriaPlato, ArrayList<String>> elecciones = new HashMap<>(); // ahora ArrayList<String>
+    private static final Map<categoriaPlato, ArrayList<String>> elecciones = new HashMap<>();
 
     public static void iniciarEjercicio(App app) {
         elecciones.clear();
         esperandoCategoria = true;
+        app.setTituloEjercicio("Ejercicio 4 Tema 7 - Menú de restaurante");
         preguntarCategoria(app);
     }
 

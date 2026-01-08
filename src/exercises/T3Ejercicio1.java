@@ -25,14 +25,12 @@ public class T3Ejercicio1 {
             edad = Integer.parseInt(texto);
             if (edad < 0) {
                 app.appendConsola("❌ Error: la edad no puede ser negativa.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
         } catch (NumberFormatException e) {
             app.appendConsola("❌ Error: ingresa un número válido.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
 
@@ -48,7 +46,6 @@ public class T3Ejercicio1 {
         }
     }
 
-    // Método separado para evaluar la mayoría de edad
     private static void evaluarMayoridad(App app, int edad) {
         int edadLegal = 18;
         boolean mayoria = edad >= edadLegal;

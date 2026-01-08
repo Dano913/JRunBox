@@ -10,7 +10,7 @@ public class T9Ejercicio6 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 6 - Encontrar el mayor elemento de cada columna");
+        app.setTituloEjercicio("Ejercicio 6 Tema 9 - Encontrar el mayor elemento de cada columna");
         app.setPreguntas(new String[]{
                 "Presiona enter para crear la matriz"
         });

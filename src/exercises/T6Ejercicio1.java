@@ -4,7 +4,7 @@ import utils.EjercicioUtils;
 
 public class T6Ejercicio1 {
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 1 - Cobro de boadillos y bebidas");
+        app.setTituloEjercicio("Ejercicio 1 Tema 6 - Cobro de boadillos y bebidas");
         app.setPreguntas(new String[]{
                 "Introduce cuantas bebídas vas a pedir",
                 "Introduce cuantos bocatas vas a pedir",

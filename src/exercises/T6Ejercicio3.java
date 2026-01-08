@@ -4,7 +4,7 @@ import utils.EjercicioUtils;
 
 public class T6Ejercicio3 {
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 2 - Compra con IVA");
+        app.setTituloEjercicio("Ejercicio 3 Tema 6 - Genera un número a base de unidades");
         app.setPreguntas(new String[]{
                 "Introduce decenas de mil",
                 "Introduce unidades de mil",

@@ -26,8 +26,7 @@ public class T3Ejercicio11 {
                 Double.parseDouble(texto);
             } catch (NumberFormatException e) {
                 app.appendConsola("❌ Error: ingresa un número válido.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
         }
@@ -36,8 +35,7 @@ public class T3Ejercicio11 {
             // Validación booleano para socio
             if (!texto.equalsIgnoreCase("true") && !texto.equalsIgnoreCase("false")) {
                 app.appendConsola("❌ Error: ingresa 'true' o 'false'.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
         }

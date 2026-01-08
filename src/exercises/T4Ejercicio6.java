@@ -20,8 +20,7 @@ public class T4Ejercicio6 {
             num = Integer.parseInt(texto);
         } catch (NumberFormatException e) {
             app.appendConsola("❌ Error: ingresa un número válido.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
 

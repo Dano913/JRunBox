@@ -10,7 +10,7 @@ public class T8Ejercicio4 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 4 - Buscar un elemento en el array");
+        app.setTituloEjercicio("Ejercicio 4 Tema 8 - Buscar un elemento en el array");
         app.setPreguntas(new String[]{
                 "Introduce el número secreto",
         });
@@ -49,8 +49,8 @@ public class T8Ejercicio4 {
             numeroBuscado = Integer.parseInt(texto);
         } catch (NumberFormatException e) {
             app.appendConsola("Por favor, introduce un número válido.\n");
-            app.limpiarRespuestaField();  // limpiar input
-            app.requestFocusRespuesta();  // poner cursor
+            // Limpiar input y devolver foco
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
 
@@ -67,8 +67,8 @@ public class T8Ejercicio4 {
         // Mensaje si no se encontró
         if (!encontrado) {
             app.appendConsola("El número "+numeroBuscado+" no está en el array.\n");
-            app.limpiarRespuestaField();  // limpiar input
-            app.requestFocusRespuesta();  // poner cursor
+            // Limpiar input y devolver foco
+            EjercicioUtils.limpiarRespuestaYFoco(app);
         } else {
             // Número encontrado → mostrar intentos y avanzar
             app.appendConsola("Número de intentos realizados: " + intentos + "\n");

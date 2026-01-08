@@ -6,7 +6,7 @@ import utils.EjercicioUtils;
 public class T8Ejercicio2 {
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 2 - Recorrer array con for");
+        app.setTituloEjercicio("Ejercicio 2 Tema 8 - Recorrer array con for");
         // Pregunta opcional o de ejemplo
         app.setPreguntas(new String[]{
                 "Presiona enter para recorrer array con for"

@@ -6,7 +6,7 @@ import utils.EjercicioUtils;
 public class T8Ejercicio1 {
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 1 - Crear y mostrar un array");
+        app.setTituloEjercicio("Ejercicio 1 Tema 8 - Crear y mostrar un array");
         // Pregunta opcional o de ejemplo
         app.setPreguntas(new String[]{
                 "Presiona enter para imprimir el array"

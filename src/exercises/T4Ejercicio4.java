@@ -14,29 +14,20 @@ public class T4Ejercicio4 {
     }
 
     public static void procesarRespuesta(App app, String texto) {
-        int indice = app.getIndicePregunta();
-
-        // Validar número de opción
         try {
             int opcion = Integer.parseInt(texto);
             if (opcion < 1 || opcion > 4) {
                 app.appendConsola("❌ Error: opción inválida (1-4).\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
         } catch (NumberFormatException e) {
             app.appendConsola("❌ Error: ingresa un número válido.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
-
-        // Guardar y mostrar
         EjercicioUtils.procesarRespuesta(app, texto, new String[]{"Opción elegida"}, new String[]{""});
         EjercicioUtils.avanzarPregunta(app);
-
-        // Mostrar resultado final
         if (app.getIndicePregunta() >= app.getPreguntas().length) {
             int opcion = Integer.parseInt(app.getRespuestasTexto()[0]);
             String mensaje = switch (opcion) {

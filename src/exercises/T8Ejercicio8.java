@@ -11,7 +11,7 @@ public class T8Ejercicio8 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio - Contar repeticiones de animales");
+        app.setTituloEjercicio("Ejercicio 8 Tema 8 - Contar repeticiones de animales");
         app.setPreguntas(new String[]{
                 "Introduce un animal de la lista: Perro, Gato, Elefante, Tigre, Mono, León, Cebra"
         });

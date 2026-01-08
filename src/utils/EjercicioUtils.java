@@ -16,10 +16,8 @@ public class EjercicioUtils {
         // Limpia el campo de texto
         app.setInputPanelVisible(true);
         // Hace visible el panel de entrada
-        app.limpiarConsola();
-        // Limpia la consola
-        app.requestFocusRespuesta();
-        // Pone el cursor en el campo de texto
+        limpiarConsolaYFoco(app);
+        // Limpia la consola y pone el curso en el campo de texto
     }
 
     // Metodo genérico para avanzar a la siguiente pregunta
@@ -31,9 +29,8 @@ public class EjercicioUtils {
         if (app.getIndicePregunta() < app.getPreguntas().length) {
             app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
             // Muestra la siguiente pregunta
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
-            // Coloca el cursor en el campo de entrada
+            limpiarRespuestaYFoco(app);
+            // Limpia el campo de respuesta y coloca el cursor en el campo de entrada
         } else {
             app.setInputPanelVisible(false);
             // Oculta el panel si no quedan preguntas
@@ -48,12 +45,12 @@ public class EjercicioUtils {
         if (indice > 0) {
             app.setIndicePregunta(indice - 1);
             app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            limpiarRespuestaYFoco(app);
+            // Limpia el campo de respuesta y coloca el cursor en el campo de entrada
         } else {
             // Si estamos en la primera pregunta, solo limpiamos el campo
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            limpiarRespuestaYFoco(app);
+            // Limpia el campo de respuesta y coloca el cursor en el campo de entrada
         }
     }
 
@@ -66,5 +63,17 @@ public class EjercicioUtils {
         // Obtiene la unidad correspondiente si existe
         app.appendConsola(etiquetas[indice] + ": " + texto + unidad + "\n");
         // Muestra la respuesta con etiqueta y unidad
+    }
+
+    // Limpia la consola y coloca el foco en el campo de respuesta
+    public static void limpiarConsolaYFoco(App app) {
+        app.limpiarConsola();
+        app.requestFocusRespuesta();
+    }
+
+    // Limpia el campo de respuesta y coloca el foco
+    public static void limpiarRespuestaYFoco(App app) {
+        app.limpiarRespuestaField();
+        app.requestFocusRespuesta();
     }
 }

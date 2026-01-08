@@ -6,7 +6,7 @@ import utils.EjercicioUtils;
 public class T7Ejercicio8 {
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 7 - Sistema de niveles de juego");
+        app.setTituloEjercicio("Ejercicio 8 Tema 7 - Tipo de archivo según extensión");
         // Solo se mostrará esta vez
         app.setPreguntas(new String[]{
                 "Introduce la extensión de tu archivo"

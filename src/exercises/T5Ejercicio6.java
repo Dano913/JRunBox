@@ -15,24 +15,16 @@ public class T5Ejercicio6 {
     public static void procesarRespuesta(App app, String texto) {
         String[] etiquetas = {"Número introducido"};
         String[] unidades = {""};
-
-        // Guardamos la respuesta y la mostramos
         EjercicioUtils.procesarRespuesta(app, texto, etiquetas, unidades);
-
         int num;
         try {
             num = Integer.parseInt(texto);
         } catch (NumberFormatException e) {
             app.appendConsola("Por favor, introduce un número válido.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
-
-        // Ocultamos el panel de entrada
         app.setInputPanelVisible(false);
-
-        // Ejecutamos la cuenta atrás en un hilo separado
         new Thread(() -> {
             int contador = num;
             app.appendConsola("Cuenta atrás:\n");

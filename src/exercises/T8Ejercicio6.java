@@ -7,7 +7,7 @@ public class T8Ejercicio6 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 6 - Calcular suma y promedio de un array");
+        app.setTituloEjercicio("Ejercicio 6 Tema 8 - Calcular suma y promedio de un array");
         app.setPreguntas(new String[]{
                 "Pulsa enter para generar array",
         });

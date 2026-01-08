@@ -28,14 +28,12 @@ public class T2Ejercicio9 {
             valor = Double.parseDouble(texto);
             if (valor < 1 || valor > 10) {
                 app.appendConsola("❌ Error: la nota debe estar entre 1 y 10.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
         } catch (NumberFormatException e) {
             app.appendConsola("❌ Error: ingresa un número válido.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
 

@@ -11,7 +11,7 @@ public class T9Ejercicio7 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 7 - Transponer una matriz");
+        app.setTituloEjercicio("Ejercicio 7 Tema 9 - Transponer una matriz");
         app.setPreguntas(new String[]{
                 "Presiona enter para crear la matriz"
         });

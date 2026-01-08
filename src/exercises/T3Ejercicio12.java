@@ -15,20 +15,17 @@ public class T3Ejercicio12 {
         // Validación de la contraseña
         if (texto.equals("12345678") || texto.equalsIgnoreCase("password")) {
             app.appendConsola("❌ No puedes usar esa contraseña.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
         if (texto.length() < 8) {
             app.appendConsola("❌ La contraseña debe tener al menos 8 caracteres.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
         if (!texto.matches(".*\\d.*")) {
             app.appendConsola("❌ La contraseña debe contener al menos un número.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
 

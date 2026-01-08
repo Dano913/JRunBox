@@ -12,21 +12,17 @@ public class T4Ejercicio1 {
     }
 
     public static void procesarRespuesta(App app, String texto) {
-        int indice = app.getIndicePregunta();
-
         // Validación del número entre 1 y 7
         try {
             int num = Integer.parseInt(texto);
             if (num < 1 || num > 7) {
                 app.appendConsola("❌ Error: ingresa un número entre 1 y 7.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
         } catch (NumberFormatException e) {
             app.appendConsola("❌ Error: ingresa un número válido.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
 

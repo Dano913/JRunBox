@@ -9,7 +9,7 @@ public class T9Ejercicio2 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 2 - Rellenar matriz 2x4 con input del usuario");
+        app.setTituloEjercicio("Ejercicio 2 Tema 9 - Rellenar matriz 2x4 con input del usuario");
         app.setPreguntas(new String[]{
                 "Introduce el valor para posición [0][0]:",
                 "Introduce el valor para posición [0][1]:",

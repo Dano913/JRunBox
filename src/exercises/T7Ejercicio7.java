@@ -8,7 +8,7 @@ import java.time.LocalTime;
 public class T7Ejercicio7 {
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 7 - Sistema de niveles de juego");
+        app.setTituloEjercicio("Ejercicio 7 Tema 7 - Sistema de niveles de juego");
         // Solo se mostrará esta vez
         app.setPreguntas(new String[]{
                 "Introduce tu puntuación"

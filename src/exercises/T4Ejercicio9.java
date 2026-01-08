@@ -19,8 +19,7 @@ public class T4Ejercicio9 {
             if (num1 < 0) throw new NumberFormatException();
         } catch (NumberFormatException e) {
             app.appendConsola("❌ Error: ingresa un número entero positivo.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
 

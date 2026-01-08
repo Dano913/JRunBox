@@ -17,22 +17,18 @@ public class T3Ejercicio14 {
 
     public static void procesarRespuesta(App app, String texto) {
         int indice = app.getIndicePregunta();
-
-        // Validaciones según tipo de dato
-        if (indice == 0 || indice == 1) { // edad o ingresos
+        if (indice == 0 || indice == 1) {
             try {
                 Integer.parseInt(texto);
             } catch (NumberFormatException e) {
                 app.appendConsola("❌ Error: ingresa un número válido.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
-        } else if (indice == 2) { // deudas
+        } else if (indice == 2) {
             if (!texto.equalsIgnoreCase("true") && !texto.equalsIgnoreCase("false")) {
                 app.appendConsola("❌ Error: ingresa 'true' o 'false'.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
         }

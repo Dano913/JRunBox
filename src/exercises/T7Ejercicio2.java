@@ -17,7 +17,7 @@ public class T7Ejercicio2 {
     }
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 2 - Conversor de moneda");
+        app.setTituloEjercicio("Ejercicio 2 Tema 7 - Conversor de moneda");
         app.setPreguntas(new String[]{
                 "Introduce una cantidad en euros",
                 "Elige la moneda de destino (USD, GBP, JPY, CHF, SEK, PLN, MXN, CNY, BRL, TRY)"

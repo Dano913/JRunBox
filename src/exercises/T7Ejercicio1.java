@@ -4,7 +4,7 @@ import utils.EjercicioUtils;
 
 public class T7Ejercicio1 {
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 1 - Sistema de Calificaciones Avanzado");
+        app.setTituloEjercicio("Ejercicio 1 Tema 7 - Sistema de Calificaciones Avanzado");
         app.setPreguntas(new String[]{
                 "Introduce tu calificación",
         });

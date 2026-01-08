@@ -20,14 +20,12 @@ public class T4Ejercicio5 {
             mes = Integer.parseInt(texto);
             if (mes < 1 || mes > 12) {
                 app.appendConsola("❌ Error: el mes debe estar entre 1 y 12.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
         } catch (NumberFormatException e) {
             app.appendConsola("❌ Error: ingresa un número válido.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
 

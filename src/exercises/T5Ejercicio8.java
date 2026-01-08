@@ -7,7 +7,7 @@ public class T5Ejercicio8 {
     private static boolean primeraEjecucion = true;
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 53 - Validación de edad con do-while");
+        app.setTituloEjercicio("Ejercicio 8 Tema 5 - Validación de edad con do-while");
         app.setPreguntas(new String[]{"Introduce tu edad:"});
         primeraEjecucion = true; // Reiniciar flag para simular do-while
         EjercicioUtils.inicializarEntrada(app);
@@ -18,13 +18,9 @@ public class T5Ejercicio8 {
     public static void procesarRespuesta(App app, String texto) {
         String[] etiquetas = {"Edad introducida"};
         String[] unidades = {"años"};
-
         EjercicioUtils.procesarRespuesta(app, texto, etiquetas, unidades);
-
         int edad = -1;
         boolean valido = false;
-
-        // Simular do-while: PRIMERO ejecuta el bloque
         do {
             try {
                 edad = Integer.parseInt(texto);
@@ -37,23 +33,13 @@ public class T5Ejercicio8 {
             } catch (NumberFormatException e) {
                 app.appendConsola("❌ Edad no válida. Introduce un número entero.\n");
             }
-
-            // Si no es válido, preparar para nueva entrada
             if (!valido) {
                 app.appendConsola("Por favor, intenta de nuevo.\n\n");
                 EjercicioUtils.inicializarEntrada(app);
-                return; // Sale del método para esperar nueva entrada
+                return;
             }
-
-            // CONDICIÓN del while: se repite mientras NO sea válido
-            // Pero como usamos return arriba, esto nunca itera en el mismo método
-
-        } while (!valido); // Esta condición se evalúa DESPUÉS del bloque
-
-        // Solo llega aquí si valido == true
+        } while (!valido);
         app.appendConsola("\n✅ ¡Edad válida registrada: " + edad + " años!\n");
-
-        // Clasificación
         if (edad < 18) {
             app.appendConsola("📋 Categoría: Menor de edad\n");
         } else if (edad < 65) {
@@ -61,7 +47,6 @@ public class T5Ejercicio8 {
         } else {
             app.appendConsola("📋 Categoría: Adulto mayor\n");
         }
-
         app.setInputPanelVisible(false);
     }
 }

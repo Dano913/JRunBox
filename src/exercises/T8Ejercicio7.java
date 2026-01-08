@@ -10,7 +10,7 @@ public class T8Ejercicio7 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 7 - Encontrar el número mayor y menor");
+        app.setTituloEjercicio("Ejercicio 7 Tema 8 - Encontrar el número mayor y menor");
         app.setPreguntas(new String[]{
                 "Pulsa enter para generar array",
         });

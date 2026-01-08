@@ -6,7 +6,7 @@ import utils.EjercicioUtils;
 public class T7Ejercicio9 {
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 9 - Calculadora de IMC con Clasificación");
+        app.setTituloEjercicio("Ejercicio 9 Tema 7 - Calculadora de IMC con Clasificación");
         // Solo se mostrará esta vez
         app.setPreguntas(new String[]{
                 "Introduce tu altura",

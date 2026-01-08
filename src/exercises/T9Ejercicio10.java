@@ -15,7 +15,7 @@ public class T9Ejercicio10 {
     private static boolean etiquetasMostradas = false;
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 10 - Sistema de notas de una clase");
+        app.setTituloEjercicio("Ejercicio 10 Tema 9 - Sistema de notas de una clase");
         app.setPreguntas(new String[]{
                 "¿Cuántos estudiantes hay?",
                 "¿Cuántas asignaturas hay?"
@@ -25,7 +25,7 @@ public class T9Ejercicio10 {
 
     public static void procesarRespuesta(App app, String texto) {
 
-        // Mantener estas líneas literal dentro del método
+        // Mantener estas líneas literal dentro del metodo
         String[] etiquetas = { "Estudiantes", "Asignaturas" };
         String[] unidades = { "", "" };
 

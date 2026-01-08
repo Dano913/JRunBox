@@ -41,7 +41,7 @@ public class App extends JFrame {
     }
 
     private void initUI() {
-        setTitle("Mini Aplicación de Ejercicios");
+        setTitle("JRunBox");
         setSize(900, 700);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridBagLayout()); // ventana centrada

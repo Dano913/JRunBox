@@ -11,15 +11,12 @@ public class T5Ejercicio9 {
     public static void iniciarEjercicio(App app) {
         cantidadEstudiantes = 0;
         contador = 0;
-
-        app.setTituloEjercicio("Ejercicio 9 - Sistema de notas");
+        app.setTituloEjercicio("Ejercicio 9 Tema 5 - Sistema de notas");
         app.setPreguntas(new String[]{"¿Cuántos estudiantes hay en la clase?"});
         EjercicioUtils.inicializarEntrada(app);
     }
 
     public static void procesarRespuesta(App app, String texto) {
-
-        // Fase 0: pedir cantidad de estudiantes
         if (cantidadEstudiantes == 0) {
             try {
                 cantidadEstudiantes = Integer.parseInt(texto);
@@ -29,17 +26,12 @@ public class T5Ejercicio9 {
                 EjercicioUtils.inicializarEntrada(app);
                 return;
             }
-
-            // Preparamos array para calificaciones
             app.setRespuestasTexto(new String[cantidadEstudiantes]);
             contador = 0;
             app.setPreguntaLabel("Introduce la nota del estudiante 1 (0-10):");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
-
-        // Fase 1: pedir calificaciones con while simulado
         do {
             int nota;
             try {
@@ -48,11 +40,9 @@ public class T5Ejercicio9 {
             } catch (NumberFormatException e) {
                 app.appendConsola("Introduce una nota válida entre 0 y 10.\n");
                 app.setPreguntaLabel("Introduce la nota del estudiante " + (contador + 1) + " (0-10):");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
-
             app.getRespuestasTexto()[contador] = texto;
             contador++;
             app.appendConsola("Nota del estudiante " + contador + ": " + texto + "\n");
@@ -60,16 +50,11 @@ public class T5Ejercicio9 {
             // Si quedan más estudiantes, se sale para esperar el siguiente input
             if (contador < cantidadEstudiantes) {
                 app.setPreguntaLabel("Introduce la nota del estudiante " + (contador + 1) + " (0-10):");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
-
         } while (contador < cantidadEstudiantes);
-
-        // Fase 2: reporte final
         app.appendConsola("\n--- REPORTE DE CALIFICACIONES ---\n");
-
         for (int i = 0; i < cantidadEstudiantes; i++) {
             int nota = Integer.parseInt(app.getRespuestasTexto()[i]);
             String letra;
@@ -83,7 +68,6 @@ public class T5Ejercicio9 {
             }
             app.appendConsola("Estudiante " + (i + 1) + ": " + nota + " puntos = Calificación " + letra + "\n");
         }
-
         app.setInputPanelVisible(false);
     }
 }

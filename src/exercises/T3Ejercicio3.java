@@ -22,14 +22,12 @@ public class T3Ejercicio3 {
             nota = Integer.parseInt(texto);
             if (nota < 0 || nota > 10) {
                 app.appendConsola("❌ Error: la nota debe estar entre 0 y 10.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
         } catch (NumberFormatException e) {
             app.appendConsola("❌ Error: ingresa un número válido.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
 

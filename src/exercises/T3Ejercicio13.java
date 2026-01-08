@@ -20,8 +20,7 @@ public class T3Ejercicio13 {
                 Integer.parseInt(texto);
             } catch (NumberFormatException e) {
                 app.appendConsola("❌ Error: ingresa un número válido para la edad.\n");
-                app.limpiarRespuestaField();
-                app.requestFocusRespuesta();
+                EjercicioUtils.limpiarRespuestaYFoco(app);
                 return;
             }
         }

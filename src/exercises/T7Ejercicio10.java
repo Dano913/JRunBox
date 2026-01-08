@@ -26,7 +26,7 @@ public class T7Ejercicio10 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 10 - Sistema de Estado de Pedido");
+        app.setTituloEjercicio("Ejercicio 10 Tema 7 - Sistema de Estado de Pedido");
         // Pregunta opcional o de ejemplo
         app.setPreguntas(new String[]{
                 "Presiona Enter para generar el estado del pedido"

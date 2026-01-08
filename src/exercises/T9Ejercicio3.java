@@ -10,7 +10,7 @@ public class T9Ejercicio3 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 3 - Sumar elementos de una matriz");
+        app.setTituloEjercicio("Ejercicio 3 Tema 9 - Sumar elementos de una matriz");
         app.setPreguntas(new String[]{
                 "Presiona enter para crear la matriz"
         });

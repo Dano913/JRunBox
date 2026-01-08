@@ -22,16 +22,14 @@ public class T3Ejercicio7 {
             nota = Double.parseDouble(texto);
         } catch (NumberFormatException e) {
             app.appendConsola("❌ Error: ingresa un número válido.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
 
         // Validar que la nota esté entre 1 y 10
         if (nota < 1 || nota > 10) {
             app.appendConsola("❌ Error: la nota debe estar entre 1 y 10.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
 

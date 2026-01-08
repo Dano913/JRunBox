@@ -5,7 +5,7 @@ import utils.EjercicioUtils;
 public class T7Ejercicio3 {
 
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 3 - Clasificador de temperatura");
+        app.setTituloEjercicio("Ejercicio 3 Tema 7 - Clasificador de temperatura");
         app.setPreguntas(new String[]{
                 "Introduce una temperatura en grados Celsius",
         });

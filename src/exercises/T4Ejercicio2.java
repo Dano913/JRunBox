@@ -12,14 +12,12 @@ public class T4Ejercicio2 {
     }
 
     public static void procesarRespuesta(App app, String texto) {
-        int indice = app.getIndicePregunta();
         char letra;
 
         // Validación de letra
         if (texto.length() != 1 || "ABCDF".indexOf(texto.toUpperCase()) == -1) {
             app.appendConsola("❌ Error: ingresa una letra válida (A, B, C, D, F).\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         } else {
             letra = texto.toUpperCase().charAt(0);

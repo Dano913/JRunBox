@@ -11,16 +11,13 @@ public class T4Ejercicio8 {
     }
 
     public static void procesarRespuesta(App app, String texto) {
-        int indice = app.getIndicePregunta();
-
         // Validar número antes de guardar
         int num1;
         try {
             num1 = Integer.parseInt(texto);
         } catch (NumberFormatException e) {
             app.appendConsola("❌ Error: ingresa un número válido.\n");
-            app.limpiarRespuestaField();
-            app.requestFocusRespuesta();
+            EjercicioUtils.limpiarRespuestaYFoco(app);
             return;
         }
 

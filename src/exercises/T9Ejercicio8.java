@@ -11,7 +11,7 @@ public class T9Ejercicio8 {
 
     // Inicializa el ejercicio
     public static void iniciarEjercicio(App app) {
-        app.setTituloEjercicio("Ejercicio 8 - Contar paraes e impares en una matriz");
+        app.setTituloEjercicio("Ejercicio 8 Tema 9 - Contar pares e impares en una matriz");
         app.setPreguntas(new String[]{
                 "Presiona enter para crear la matriz"
         });
