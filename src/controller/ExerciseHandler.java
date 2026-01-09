@@ -6,13 +6,13 @@ import java.lang.reflect.Method;
 public class ExerciseHandler {
 
     // Configuración: número de ejercicios por tema
-    private static final int[] EJERCICIOS_POR_TEMA = {10, 10, 15, 10, 10, 4, 10, 10, 10, 10};
+    private static final int[] EJERCICIOS_POR_TEMA = {10, 10, 15, 10, 10, 4, 10, 10, 10, 12, 10, 10};
 
     // Generar nombres legibles para la interfaz
     public static final String[] NOMBRES_EJERCICIOS = generarNombres(EJERCICIOS_POR_TEMA);
 
     /**
-     * Genera nombres legibles: "T1 - Ejercicio 1", "T2 - Ejercicio 5", etc.
+     * Genera nombres legibles
      */
     private static String[] generarNombres(int[] ejerciciosPorTema) {
         int total = 1; // +1 para "Seleccione Ejercicio"

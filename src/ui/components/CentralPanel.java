@@ -10,7 +10,7 @@ public class CentralPanel extends RoundedPanel {
     public CentralPanel(
             JLabel tituloEjercicioLabel,
             JPanel inputPanel,
-            JLabel preguntaLabel,
+            JTextArea preguntaArea,
             JTextField respuestaField,
             JButton siguienteButton,
             Color fgLight
@@ -32,11 +32,16 @@ public class CentralPanel extends RoundedPanel {
         inputPanel.setVisible(false);
 
         // --- Pregunta Label ---
-        preguntaLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        preguntaLabel.setForeground(fgLight);
-        preguntaLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        inputPanel.add(preguntaLabel);
-        inputPanel.add(Box.createVerticalStrut(10)); // espacio debajo
+        preguntaArea.setFont(new Font("Arial", Font.BOLD, 20));
+        preguntaArea.setForeground(fgLight);
+        preguntaArea.setBackground(new Color(50, 50, 50));
+        preguntaArea.setLineWrap(true);        // wrap automático
+        preguntaArea.setWrapStyleWord(true);   // wrap por palabras
+        preguntaArea.setEditable(false);       // solo lectura
+        preguntaArea.setAlignmentX(Component.LEFT_ALIGNMENT);
+        preguntaArea.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+
+        inputPanel.add(preguntaArea);
 
         // --- Panel para respuestaField + siguienteButton ---
         JPanel respuestaButtonPanel = new JPanel();

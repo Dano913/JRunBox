@@ -37,23 +37,6 @@ public class EjercicioUtils {
         }
     }
 
-    // Metodo para retroceder a la pregunta anterior (simula limpiar input)
-    public static void retrocederPregunta(App app) {
-        int indice = app.getIndicePregunta();
-
-        // No retrocedemos si ya estamos en la primera pregunta
-        if (indice > 0) {
-            app.setIndicePregunta(indice - 1);
-            app.setPreguntaLabel(app.getPreguntas()[app.getIndicePregunta()]);
-            limpiarRespuestaYFoco(app);
-            // Limpia el campo de respuesta y coloca el cursor en el campo de entrada
-        } else {
-            // Si estamos en la primera pregunta, solo limpiamos el campo
-            limpiarRespuestaYFoco(app);
-            // Limpia el campo de respuesta y coloca el cursor en el campo de entrada
-        }
-    }
-
     // Metodo genérico para procesar respuestas de texto y guardarlas
     public static void procesarRespuesta(App app, String texto, String[] etiquetas, String[] unidades) {
         int indice = app.getIndicePregunta();

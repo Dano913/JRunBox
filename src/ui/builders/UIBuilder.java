@@ -27,7 +27,7 @@ public class UIBuilder {
     public RoundedPanel buildCentralPanel(
             JLabel tituloEjercicioLabel,
             JPanel inputPanel,
-            JLabel preguntaLabel,
+            JTextArea preguntaArea,
             JTextField respuestaField,
             JButton siguienteButton,
             Color fgLight
@@ -35,7 +35,7 @@ public class UIBuilder {
         return new CentralPanel(
                 tituloEjercicioLabel,
                 inputPanel,
-                preguntaLabel,
+                preguntaArea,
                 respuestaField,
                 siguienteButton,
                 fgLight

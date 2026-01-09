@@ -17,7 +17,7 @@ public class App extends JFrame {
     private JLabel tituloEjercicioLabel;
     private JTextArea consola;
     private JPanel inputPanel;
-    private JLabel preguntaLabel;
+    private JTextArea preguntaArea;
     private JTextField respuestaField;
     private JButton siguienteButton;
 
@@ -68,14 +68,14 @@ public class App extends JFrame {
         // --- PANEL CENTRAL REDONDEADO ---
         tituloEjercicioLabel = new JLabel();
         inputPanel = new JPanel();
-        preguntaLabel = new JLabel();
+        preguntaArea = new JTextArea();
         respuestaField = new JTextField();
         siguienteButton = new JButton("Siguiente");
 
         RoundedPanel centralPanel = builder.buildCentralPanel(
                 tituloEjercicioLabel,
                 inputPanel,
-                preguntaLabel,
+                preguntaArea,
                 respuestaField,
                 siguienteButton,
                 fgLight
@@ -132,7 +132,7 @@ public class App extends JFrame {
     public int getPuntuacion() { return puntuacion; }
     public void setPuntuacion(int puntuacion) { this.puntuacion = puntuacion; }
 
-    public void setPreguntaLabel(String texto) { preguntaLabel.setText(texto); }
+    public void setPreguntaLabel(String texto) { preguntaArea.setText(texto); }
     public void limpiarRespuestaField() { respuestaField.setText(""); }
     public void setInputPanelVisible(boolean visible) { inputPanel.setVisible(visible); }
     public void limpiarConsola() { consola.setText(""); }
